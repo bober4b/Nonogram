@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Nonogram
 {
@@ -10,15 +11,15 @@ namespace Nonogram
     {
         private Boolean color;
         private Boolean answered;
-        public Field() 
+        public Field()
         {
             color = false;
             answered = false;
         }
-        public Field(Boolean color) 
+        public Field(Boolean color)
         {
             this.color = color;
-            answered=false;
+            answered = false;
         }
         public Boolean iscolor(Boolean color)
         {
@@ -27,10 +28,19 @@ namespace Nonogram
                 return true;
             else return false;
         }
+        public void setcolor(Boolean color) 
+        {
+            this.color = color;
+        }
 
+        public Boolean answer()
+        {
+            return answered;
+        }
+        
         public override string ToString()
         {
-            return "█";
+            return "███";
         }
         
     }
