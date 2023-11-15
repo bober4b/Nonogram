@@ -29,7 +29,7 @@ namespace Nonogram
 
             gameField = new GameField();
             gameField.gameViewTable(height,width);
-            gameField.gameViewField(field);
+            gameField.gameViewField(field, height, width);
             Random rnd = new Random();
             int seed=rnd.Next();
             colorseter(seed);
@@ -60,16 +60,24 @@ namespace Nonogram
                 }
             gameField = new GameField();
             gameField.gameViewTable(height, width);
-            gameField.gameViewField(field);
+            for( int i = 0; i < 1000000;i++)
+            {
+                i = i;
+            }
+            gameField.gameViewField(field, height, width);
             Random rnd = new Random();
             int seed=rnd.Next();
             colorseter(seed);
         }
 
-        public void play()
+        public void Play()
         {
             int x = width/2+2;
             int y = height/2+2;
+            int arrayx = 0;
+            int arrayy = 0;
+            int leftview=width/2+2;
+            int topview=height/2+2;
 
             ConsoleKeyInfo keyInfo;
             do
@@ -81,29 +89,42 @@ namespace Nonogram
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        
-                            if (y > 1)
-                                y-=2;
+
+                        if (y > topview)
+                        {
+                            y -= 2;
+                            arrayy--;
+                        }
                             break;
                         
                     case ConsoleKey.DownArrow:
-                        if (y < height*2 -2)
-                            y+=2;
+                        if (y < topview + height * 2 - 2)
+                        {
+                            y += 2;
+                            arrayy++;
+                        }
                         break;
 
                    case ConsoleKey.LeftArrow:
-                        if (x > 4)
-                            x-=4;
+                        if (x > topview)
+                        {
+                            x -= 4;
+                            arrayx--;
+                        }
                         break; 
                     
                    case ConsoleKey.RightArrow:
-                        if (x <= width*4 - 4)
-                            x+=4;
+                        if (x <= leftview+width*4 - 8)
+                        {
+                            x += 4;
+                            arrayx++;
+                        }
+                            
                         break;
                     case ConsoleKey.Spacebar:
-                        if (!field[y/2,x/4].answer())
+                        if (!field[arrayy,arrayx].answer())
                         {
-                            if (field[y / 2, x / 4].iscolor(true))
+                            if (field[arrayy,arrayx].iscolor(true))
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                                 Console.SetCursorPosition(x - 1, y);
@@ -123,9 +144,9 @@ namespace Nonogram
                         }
                         break;
                     case ConsoleKey.M:
-                        if (!field[y / 2, x / 4].answer())
+                        if (!field[arrayy, arrayx].answer())
                         {
-                            if (field[y/2,x/4].iscolor(false))
+                            if (field[arrayy, arrayx].iscolor(false))
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.SetCursorPosition(x - 1, y);

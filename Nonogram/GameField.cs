@@ -12,6 +12,7 @@ namespace Nonogram
         private string widthstring;
         public void gameViewTable(int height, int width)
         {
+            //Console.SetCursorPosition(8, 10);
             for (int i = 0; i < (height + 1) / 2; i++)
             {
                 for (int j = 0; j < (width + 1) / 2; j++)
@@ -94,19 +95,21 @@ namespace Nonogram
             
         }
 
-        public void gameViewField(Field[,] field)
+        public void gameViewField(Field[,] field,int width,int height)
         {
+
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(1, 6);
+            Console.SetCursorPosition(5, 6);
             for(int i=1; i<field.GetLength(0)*2; i+=2)
                 for(int j=6; j<field.GetLength(1)*4+6;j+=4)
                 {
-                    Console.SetCursorPosition(j, i);
+                    Console.SetCursorPosition(j, i+8);
                     Console.WriteLine(field[i/2,(j-6)/4].ToString());
                 }
+            Console.ForegroundColor= ConsoleColor.White;
         }
 
-        private string gameViewHintLeft(int width,int height,Boolean index)
+        private string gameViewHintLeft(int width, int height, Boolean index)
         {
             string left = "";
                 
@@ -123,6 +126,12 @@ namespace Nonogram
         private string gameViewHintTop(int width,int height,Boolean index)
         {
             string top = "";
+            for (int i = 0; i < (height + 1) / 2; i++)
+            {
+                for (int j = 0; j < (width + 1) / 2; j++)
+                    top += " ";
+                top += "\n";
+            }
 
             for (int i = 0; i < (height + 1) / 2; i++)
             {

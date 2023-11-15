@@ -17,6 +17,6 @@ Console.WriteLine("╔════╗");
 Console.WriteLine("║ ██ ║");
 Console.WriteLine("╚════╝");*/
 //Console.WriteLine(12 / 2);
-gra.play();
+gra.Play();
 
 
