@@ -12,8 +12,8 @@ namespace Nonogram
     {
         private int height;
         private int width;
-        private int startx=15;
-        private int starty=15;
+        private int startx=20;
+        private int starty=20;
 
         private static Field[,] field;
         private static GameField gameField;

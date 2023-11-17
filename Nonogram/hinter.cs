@@ -8,18 +8,19 @@ namespace Nonogram
 {
     internal class Hinter
     {
-        private string[] hintListTop ;
+        private string[,] hintListTop ;
         private string[] hintListLeft ;
 
         public void hintseterTop(Field[,] field)
         {
-            hintListTop = new string[field.GetLength(1)];
+             hintListTop = new string[field.GetLength(0)/2+field.Length%2, field.GetLength(1)];
 
             for (int i = 0; i < field.GetLength(1); i++)
             {
+                int current = 0;
                 int numbertop = 0;
                 
-                string numberstring = "";
+                //string numberstring = "";
                 for (int j = 0; j < field.GetLength(0); j++)
                 {
                     if(field[j, i].getcolor() )
@@ -31,20 +32,29 @@ namespace Nonogram
                     {
                         if(numbertop!=0 )
                         {
-                            numberstring+= $"{numbertop},";
+                            hintListTop[current,i] = $"{numbertop}";
                             numbertop = 0;
+                            current++;
+                            
                         }
                     }
-                    
 
+                    
                 }
-                hintListTop[i] = numberstring;
+                if( numbertop!=0 )
+                {
+                    hintListTop[current, i] = $"{numbertop}";
+                }
+                //hintListTop[i] = numberstring;
             }
         }
-        public string[] hintGeterTop()
+        public string[] hintGeterTop(int index)
         { 
+            
             return hintListTop;
         
         }
+        
     }
+    
 }

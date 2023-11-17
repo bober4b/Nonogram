@@ -16,7 +16,7 @@ namespace Nonogram
         {
             // Inicjalizacja widthstring jako tablicy
             widthstring = new string[(height + 1) / 2 + height + 1+100];
-            string[] hint = hinter.hintGeterTop();
+            //string[] hint = hinter.hintGeterTop();
 
 
             // Aktualna pozycja w tablicy widthstring
@@ -38,7 +38,7 @@ namespace Nonogram
                 currentPosition++;
                     
             }
-            widthstring[currentPosition-1].Insert(10, "xsdfsfadfasdadadada");
+            
 
 
 
@@ -111,9 +111,11 @@ namespace Nonogram
         public void gameViewTable(int startx,int starty)
         {
             int i = 0;
+            
             foreach(string line in widthstring)
             {
                 Console.SetCursorPosition(startx,starty+i);
+                
                 i++;
                 Console.WriteLine(line);
             }
