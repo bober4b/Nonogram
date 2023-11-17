@@ -1,58 +1,24 @@
-﻿using System;
+﻿using Nonogram;
 
-class Program
-{
-    static void Main()
-    {
-        // Przykładowa dwuwymiarowa tablica znaków
-        char[,] originalArray = {
-            {'A', 'B', 'C'},
-            {'D', 'E', 'F'},
-            {'G', 'H', 'I'}
-        };
 
-        // Wyświetlanie oryginalnej tablicy
-        Console.WriteLine("Oryginalna tablica:");
-        PrintArray(originalArray);
+Gra gra = new(11,15);
+Console.SetCursorPosition(1, 1);
+Console.ForegroundColor = ConsoleColor.Cyan;
+Console.WindowWidth = 80;  // Szerokość konsoli w kolumnach
+Console.WindowHeight = 50; // Wysokość konsoli w wierszach
 
-        // Transponowanie tablicy
-        char[,] transposedArray = TransposeArray(originalArray);
+//Console.WriteLine("███");
 
-        // Wyświetlanie ztransponowanej tablicy
-        Console.WriteLine("\nZtransponowana tablica:");
-        PrintArray(transposedArray);
-    }
+/*Console.ForegroundColor = ConsoleColor.Magenta;
+Console.SetCursorPosition(0,21 );
+Console.WriteLine("╔");
+Console.WriteLine("═");
+Console.WriteLine("═");
+Console.WriteLine("═");
+Console.WriteLine("╔════╗");
+Console.WriteLine("║ ██ ║");
+Console.WriteLine("╚════╝");*/
+//Console.WriteLine(12 / 2);
+gra.Play();
 
-    static char[,] TransposeArray(char[,] originalArray)
-    {
-        int rows = originalArray.GetLength(0);
-        int columns = originalArray.GetLength(1);
 
-        char[,] transposedArray = new char[columns, rows];
-
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                transposedArray[j, i] = originalArray[i, j];
-            }
-        }
-
-        return transposedArray;
-    }
-
-    static void PrintArray(char[,] array)
-    {
-        int rows = array.GetLength(0);
-        int columns = array.GetLength(1);
-
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                Console.Write(array[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-    }
-}
