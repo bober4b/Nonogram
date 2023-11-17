@@ -12,6 +12,8 @@ namespace Nonogram
     {
         private int height;
         private int width;
+        private int startx=15;
+        private int starty=15;
 
         private static Field[,] field;
         private static GameField gameField;
@@ -26,13 +28,15 @@ namespace Nonogram
                 {
                     field[i, j] = new Field();
                 }
-
+            Console.SetCursorPosition(startx,starty);
             gameField = new GameField();
-            gameField.gameViewTable(height,width);
-            gameField.gameViewField(field, height, width);
+
+            gameField.GamehintTable(field);
             Random rnd = new Random();
-            int seed=rnd.Next();
+            int seed = rnd.Next();
             colorseter(seed);
+            gameField.gameTable(height,width);
+            
             
         }
 
@@ -52,32 +56,36 @@ namespace Nonogram
         {
             this.height = height;
             this.width = width;
+            
             field = new Field[height, width];
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++)
                 {
                     field[i, j] = new Field();
                 }
+            Console.SetCursorPosition(startx, starty);
             gameField = new GameField();
-            gameField.gameViewTable(height, width);
-            for( int i = 0; i < 1000000;i++)
-            {
-                i = i;
-            }
-            gameField.gameViewField(field, height, width);
+
             Random rnd = new Random();
-            int seed=rnd.Next();
+            int seed = rnd.Next();
             colorseter(seed);
+
+            gameField.GamehintTable(field);
+            gameField.gameTable(height, width);
+            gameField.gameViewTable(startx,starty);
+
+            
+            
         }
 
         public void Play()
         {
-            int x = width/2+2;
-            int y = height/2+2;
+            int x = startx+width+2+width%2;
+            int y = starty+1+height/2+height % 2;
             int arrayx = 0;
             int arrayy = 0;
-            int leftview=width/2+2;
-            int topview=height/2+2;
+            int leftview=starty+width+2 + width % 2;
+            int topview=startx+1+height/2 + height % 2;
 
             ConsoleKeyInfo keyInfo;
             do
@@ -106,7 +114,7 @@ namespace Nonogram
                         break;
 
                    case ConsoleKey.LeftArrow:
-                        if (x > topview)
+                        if (x > leftview)
                         {
                             x -= 4;
                             arrayx--;

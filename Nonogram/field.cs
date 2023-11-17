@@ -11,6 +11,7 @@ namespace Nonogram
     {
         private Boolean color;
         private Boolean answered;
+        private Boolean _answer;
         public Field()
         {
             color = false;
@@ -25,12 +26,16 @@ namespace Nonogram
         {
             answered = true;
             if (this.color == color)
-                return true;
-            else return false;
+            { _answer = true; return true; }
+            else { _answer = false; return false; }
         }
         public void setcolor(Boolean color) 
         {
             this.color = color;
+        }
+        public Boolean getcolor()
+        {
+            return this.color;
         }
 
         public Boolean answer()
@@ -40,7 +45,14 @@ namespace Nonogram
         
         public override string ToString()
         {
-            return "███";
+            if (!answered)
+                return "███";
+            else
+            {
+                if (_answer == true)
+                    return "███";
+                else return "█X█";
+            }
         }
         
     }

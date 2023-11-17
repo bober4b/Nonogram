@@ -9,104 +9,122 @@ namespace Nonogram
     
     public  class GameField
     {
-        private string widthstring;
-        public void gameViewTable(int height, int width)
+        private string[] widthstring;
+        private Hinter hinter=new Hinter();
+
+        public void gameTable(int height, int width)
         {
-            //Console.SetCursorPosition(8, 10);
-            for (int i = 0; i < (height + 1) / 2; i++)
+            // Inicjalizacja widthstring jako tablicy
+            widthstring = new string[(height + 1) / 2 + height + 1+100];
+            string[] hint = hinter.hintGeterTop();
+
+
+            // Aktualna pozycja w tablicy widthstring
+            int currentPosition = 0;
+            for (int i = 0;i<height/2+height%2;i++)
             {
-                for (int j = 0; j < (width + 1) / 2; j++)
-                    widthstring += " ";
-                widthstring += "\n";
+                for (int j = 0; j < width+width%2; j++)
+                    widthstring[currentPosition] += " ";
+
+                
+                for (int j = 0; j < width * 2+1 ; j++)
+                {
+                    if (j % 2 == 0)
+                        widthstring[currentPosition] += "│";
+                    else
+                        widthstring[currentPosition] += "   ";
+                }
+                widthstring[currentPosition] += "\n";
+                currentPosition++;
+                    
             }
-            widthstring += gameViewHintLeft(width,height,true);
-             widthstring += "╔";
+            widthstring[currentPosition-1].Insert(10, "xsdfsfadfasdadadada");
+
+
+
+
+            widthstring[currentPosition] += gameViewHintLeft(width, height, true);
+            widthstring[currentPosition] += "╔";
+
             for (int i = 0; i < width * 2 - 1; i++)
             {
-
                 if (i % 2 == 0)
-                    widthstring += "═══";
+                    widthstring[currentPosition] += "═══";
                 else
-                    widthstring += "╦";
-
+                    widthstring[currentPosition] += "╦";
             }
 
-            widthstring += "╗";
-            widthstring += "\n";
-            widthstring += gameViewHintLeft(width, height, false);
+            widthstring[currentPosition] += "╗";
+            widthstring[currentPosition] += "\n";
+            currentPosition++;
+            widthstring[currentPosition] += gameViewHintLeft(width, height, false);
+
             for (int i = 0; i < height; i++)
             {
-                
-
-
                 for (int j = 0; j < width * 2; j++)
                 {
                     if (j % 2 == 0)
-                        widthstring += "║";
+                        widthstring[currentPosition] += "║";
                     else
-                        widthstring += "   ";
+                        widthstring[currentPosition] += "███";
                 }
-                widthstring += "║";
+                widthstring[currentPosition] += "║\n";
+                currentPosition++;
 
-
-                widthstring += "\n";
-                
-                    widthstring += gameViewHintLeft(width, height, true);
-                
-
+                widthstring[currentPosition] += gameViewHintLeft(width, height, true);
 
                 if (i < height - 1)
                 {
-                    
-                    widthstring += "╠";
+                    widthstring[currentPosition] += "╠";
                     for (int j = 0; j < width * 2 - 1; j++)
                     {
                         if (j % 2 == 0)
-                            widthstring += "═══";
+                            widthstring[currentPosition] += "═══";
                         else
-                            widthstring += "╬";
+                            widthstring[currentPosition] += "╬";
                     }
-                    widthstring += "╣";
-                    widthstring += "\n";
-                    
-                        widthstring += gameViewHintLeft(width, height, false);
+                    widthstring[currentPosition] += "╣\n";
+                    currentPosition++;
+                    widthstring[currentPosition] += gameViewHintLeft(width, height, false);
                 }
                 else
                 {
-                    widthstring += "╚";
+                    widthstring[currentPosition] += "╚";
                     for (int j = 0; j < width * 2 - 1; j++)
                     {
                         if (j % 2 == 0)
-                            widthstring += "═══";
+                            widthstring[currentPosition] += "═══";
                         else
-                            widthstring += "╩";
+                            widthstring[currentPosition] += "╩";
                     }
-
-                    widthstring += "╝";
+                    widthstring[currentPosition] += "╝";
                 }
-
             }
 
-
-
-            Console.WriteLine(widthstring);
-            
-
-            
+            // Wyświetlanie całej tablicy
+            /*foreach (string line in widthstring)
+            {
+                Console.Write(line);
+            }*/
+        
+        }
+        public void gameViewTable(int startx,int starty)
+        {
+            int i = 0;
+            foreach(string line in widthstring)
+            {
+                Console.SetCursorPosition(startx,starty+i);
+                i++;
+                Console.WriteLine(line);
+            }
         }
 
-        public void gameViewField(Field[,] field,int width,int height)
+        public void GamehintTable(Field[,] field)
         {
+            hinter.hintseterTop(field);
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(5, 6);
-            for(int i=1; i<field.GetLength(0)*2; i+=2)
-                for(int j=6; j<field.GetLength(1)*4+6;j+=4)
-                {
-                    Console.SetCursorPosition(j, i+8);
-                    Console.WriteLine(field[i/2,(j-6)/4].ToString());
-                }
-            Console.ForegroundColor= ConsoleColor.White;
+            
+
         }
 
         private string gameViewHintLeft(int width, int height, Boolean index)
@@ -114,7 +132,7 @@ namespace Nonogram
             string left = "";
                 
 
-            for(int i=0; i < (width+1)/2; i++)
+            for(int i=0; i < width+width%2; i++)
             {
                 if(index)
                     left += "─";
@@ -123,24 +141,6 @@ namespace Nonogram
             }
             return left;
         }
-        private string gameViewHintTop(int width,int height,Boolean index)
-        {
-            string top = "";
-            for (int i = 0; i < (height + 1) / 2; i++)
-            {
-                for (int j = 0; j < (width + 1) / 2; j++)
-                    top += " ";
-                top += "\n";
-            }
-
-            for (int i = 0; i < (height + 1) / 2; i++)
-            {
-                if (index)
-                    top += "│";
-                else
-                    top += " ";
-            }
-            return top;
-        }
+        
     }
 }
