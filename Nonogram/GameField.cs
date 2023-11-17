@@ -10,7 +10,7 @@ namespace Nonogram
     public  class GameField
     {
         private string[] widthstring;
-        private Hinter hinter=new Hinter();
+        private Hinter hinter;
 
         public void gameTable(int height, int width)
         {
@@ -21,8 +21,8 @@ namespace Nonogram
 
             // Aktualna pozycja w tablicy widthstring
             int currentPosition = 0;
-            for (int i = 0;i<height/2+height%2;i++)
-            {
+            for (int i = 0;i<height/2;i++)
+            {string[] help=hinter.hintGeterTop(i);
                 for (int j = 0; j < width+width%2; j++)
                     widthstring[currentPosition] += " ";
 
@@ -32,7 +32,13 @@ namespace Nonogram
                     if (j % 2 == 0)
                         widthstring[currentPosition] += "│";
                     else
-                        widthstring[currentPosition] += "   ";
+                    {
+                        if (help[j/2].Length==1)
+                            widthstring[currentPosition] += $" {help[j / 2]} ";
+                        else
+                            widthstring[currentPosition] += $" {help[j / 2]}";
+                    }
+                        
                 }
                 widthstring[currentPosition] += "\n";
                 currentPosition++;
@@ -43,7 +49,7 @@ namespace Nonogram
 
 
 
-            widthstring[currentPosition] += gameViewHintLeft(width, height, true);
+            widthstring[currentPosition] += gameViewHintLeft(width, height, true, currentPosition-height/2-height%2);
             widthstring[currentPosition] += "╔";
 
             for (int i = 0; i < width * 2 - 1; i++)
@@ -57,7 +63,7 @@ namespace Nonogram
             widthstring[currentPosition] += "╗";
             widthstring[currentPosition] += "\n";
             currentPosition++;
-            widthstring[currentPosition] += gameViewHintLeft(width, height, false);
+            widthstring[currentPosition] += gameViewHintLeft(width, height, false, 0);
 
             for (int i = 0; i < height; i++)
             {
@@ -71,7 +77,7 @@ namespace Nonogram
                 widthstring[currentPosition] += "║\n";
                 currentPosition++;
 
-                widthstring[currentPosition] += gameViewHintLeft(width, height, true);
+                widthstring[currentPosition] += gameViewHintLeft(width, height, true, -1);
 
                 if (i < height - 1)
                 {
@@ -85,7 +91,7 @@ namespace Nonogram
                     }
                     widthstring[currentPosition] += "╣\n";
                     currentPosition++;
-                    widthstring[currentPosition] += gameViewHintLeft(width, height, false);
+                    widthstring[currentPosition] += gameViewHintLeft(width, height, false, i+1);
                 }
                 else
                 {
@@ -123,23 +129,49 @@ namespace Nonogram
 
         public void GamehintTable(Field[,] field)
         {
-            hinter.hintseterTop(field);
+            hinter=new Hinter(field);
 
             
 
         }
 
-        private string gameViewHintLeft(int width, int height, Boolean index)
+        private string gameViewHintLeft(int width, int height, Boolean index,int current)
         {
             string left = "";
-                
-
-            for(int i=0; i < width+width%2; i++)
+            string[] help;
+            if (current == -1)
             {
+                for (int i = 0; i < height / 2 + height % 2; i++)
+                {
+                    if (index)
+                        left += "──";
+                    else
+                        left += "xD ";
+                }
+                
+                return left;
+            }
+
+
+            
+                help = hinter.hintGeterLeft(current);
+            
+            for (int i=0; i < height/2+height%2; i++)
+            { 
                 if(index)
-                    left += "─";
+                    left += "──";
                 else
-                    left += " ";
+                {
+
+
+                    if (help[i] != null)
+                        if (help[i].Length == 1)
+                            left += $"{help[i]} ";
+                        else left += $"{help[i]}";
+                    else left += "";
+
+                }
+
             }
             return left;
         }

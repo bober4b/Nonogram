@@ -12,8 +12,8 @@ namespace Nonogram
     {
         private int height;
         private int width;
-        private int startx=20;
-        private int starty=20;
+        private int startx=10;
+        private int starty=10;
 
         private static Field[,] field;
         private static GameField gameField;
@@ -70,9 +70,9 @@ namespace Nonogram
             int seed = rnd.Next();
             colorseter(seed);
 
-            gameField.GamehintTable(field);
-            gameField.gameTable(height, width);
-            gameField.gameViewTable(startx,starty);
+            //gameField.GamehintTable(field);
+           // gameField.gameTable(height, width);
+           // gameField.gameViewTable(startx,starty);
 
             
             
@@ -80,12 +80,20 @@ namespace Nonogram
 
         public void Play()
         {
-            int x = startx+width+2+width%2;
+            int x = startx+width+width%2+2;
             int y = starty+1+height/2+height % 2;
             int arrayx = 0;
             int arrayy = 0;
-            int leftview=starty+width+2 + width % 2;
+            int leftview=starty+width + width % 2+4;
             int topview=startx+1+height/2 + height % 2;
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.White;
+            gameField.GamehintTable(field);
+            gameField.gameTable(height, width);
+            gameField.gameViewTable(startx,starty);
+            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(x, y);
+
 
             ConsoleKeyInfo keyInfo;
             do
