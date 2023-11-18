@@ -11,11 +11,12 @@ namespace Nonogram
     {
         private string[] widthstring;
         private Hinter hinter;
+        
 
         public void gameTable(int height, int width)
         {
             // Inicjalizacja widthstring jako tablicy
-            widthstring = new string[(height + 1) / 2 + height + 1+100];
+            widthstring = new string[27];
             //string[] hint = hinter.hintGeterTop();
 
 
@@ -60,7 +61,7 @@ namespace Nonogram
                     widthstring[currentPosition] += "╦";
             }
 
-            widthstring[currentPosition] += "╗";
+            widthstring[currentPosition] += "╦";
             widthstring[currentPosition] += "\n";
             currentPosition++;
             widthstring[currentPosition] += gameViewHintLeft(width, height, false, 0);
@@ -95,7 +96,7 @@ namespace Nonogram
                 }
                 else
                 {
-                    widthstring[currentPosition] += "╚";
+                    widthstring[currentPosition] += "╠";
                     for (int j = 0; j < width * 2 - 1; j++)
                     {
                         if (j % 2 == 0)
