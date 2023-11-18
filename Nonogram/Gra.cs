@@ -188,6 +188,7 @@ namespace Nonogram
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.SetCursorPosition(x, y);
                             }
+                            scorewriter();
                         }
                         break;
                     case ConsoleKey.M:
@@ -212,12 +213,13 @@ namespace Nonogram
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.SetCursorPosition(x, y);
                             }
+                            scorewriter();
                         }
 
                         break;
                     
                 }
-                scorewriter();
+                
             } while (keyInfo.Key != ConsoleKey.Escape);
         }
 
