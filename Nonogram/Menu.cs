@@ -37,6 +37,9 @@ namespace Nonogram
 
             foreach (string line in ex.Split("\n"))
             {
+
+
+
                 Console.SetCursorPosition(12, 13 + index);
                 Console.Write(line);
                 index++;
@@ -53,6 +56,16 @@ namespace Nonogram
             {
                 if (newGame)
                 {
+                    Console.Clear();
+                    index = 0;
+                    Console.SetCursorPosition(10, 10);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    foreach (string line in logo.Split("\n"))
+                    {
+                        Console.SetCursorPosition(11, index);
+                        Console.Write(line);
+                        index++;
+                    }
                     Console.SetCursorPosition(10, 10);
                     Gra gra = new Gra();
                     toMenu = gra.newgameinit();

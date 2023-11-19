@@ -129,6 +129,7 @@ namespace Nonogram
             scoreprogress = 0;
 
             string star = " ##   ## \n  ## ##  \n#########\n  ## ##  \n ##   ## ";
+            Console.SetCursorPosition(x, y);
             int h = 0;
             Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (string line in star.Split("\n"))
@@ -137,7 +138,7 @@ namespace Nonogram
                 Console.Write(line);
                 h++;
             }
-
+            Console.SetCursorPosition(x, y);
             Console.ForegroundColor = ConsoleColor.White;
             ConsoleKeyInfo keyInfo;
             do
@@ -351,14 +352,14 @@ namespace Nonogram
         public void GameStarter()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            string logo=("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
+            //string logo=("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
             int index = 0;
-            foreach (string line in logo.Split("\n"))
+            /*foreach (string line in logo.Split("\n"))
             {
                 Console.SetCursorPosition(width+1, index);
                 Console.Write(line);
                 index++;
-            }
+            }*/
 
             Console.SetCursorPosition(startx + width * 3 + 21, starty + height / 2 + 6);
             Console.Write("-------------------");
