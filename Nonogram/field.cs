@@ -20,7 +20,7 @@ namespace Nonogram
         public Field(Boolean color)
         {
             this.color = color;
-            answered = false;
+            answered = false; 
         }
         public Boolean iscolor(Boolean color)
         {

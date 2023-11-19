@@ -19,8 +19,11 @@ namespace Nonogram
         private int scoretrue;
         private int scoreall;
         private int scorecorrect;
+        private int scoreprogress;
         private int score;
         private int scorebad;
+
+        private Boolean menuExit=false;
 
         private string[] numbers = { " _ \n/ \\\n\\_/",
                                  "   \n/| \n | \n  ",
@@ -121,7 +124,19 @@ namespace Nonogram
             Console.SetCursorPosition(0, 0);
             Console.SetCursorPosition(x, y);
 
+            scoreprogress = 0;
 
+            string star = " ##   ## \n  ## ##  \n#########\n  ## ##  \n ##   ## ";
+            int h = 0;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            foreach (string line in star.Split("\n"))
+            {
+                Console.SetCursorPosition(startx, starty + h);
+                Console.Write(line);
+                h++;
+            }
+
+            Console.ForegroundColor = ConsoleColor.White;
             ConsoleKeyInfo keyInfo;
             do
             {
@@ -172,9 +187,10 @@ namespace Nonogram
                                 
                                 Console.ForegroundColor = ConsoleColor.DarkBlue;
                                 Console.SetCursorPosition(x - 1, y);
-                                Console.WriteLine("███");
+                                Console.Write("███");
                                 scorecorrect++;
                                 score++;
+                                scoreprogress++;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.SetCursorPosition(x, y);
                             }
@@ -182,12 +198,13 @@ namespace Nonogram
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.SetCursorPosition(x - 1, y);
-                                Console.WriteLine("█X█");
+                                Console.Write("█X█");
                                 scorebad++;
                                 //WriteConsoleOutputCharacter
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.SetCursorPosition(x, y);
                             }
+                            
                             scorewriter();
                         }
                         break;
@@ -198,7 +215,7 @@ namespace Nonogram
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                                 Console.SetCursorPosition(x - 1, y);
-                                Console.WriteLine("███");
+                                Console.Write("███");
                                 Console.ForegroundColor = ConsoleColor.White;
                                 score++;
                                 Console.SetCursorPosition(x, y);
@@ -207,27 +224,36 @@ namespace Nonogram
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGray;
                                 Console.SetCursorPosition(x - 1, y);
-                                Console.WriteLine("█X█");
+                                Console.Write("█X█");
                                 //WriteConsoleOutputCharacter
                                 scorebad++;
+                                scoreprogress++;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.SetCursorPosition(x, y);
                             }
+                            
                             scorewriter();
                         }
 
                         break;
+                    case ConsoleKey.Escape:
+                        if(DuringGameMenu())
+                        {
+                            return;
+                        }
+                        else
+                        break;
                     
                 }
                 
-            } while (keyInfo.Key != ConsoleKey.Escape);
+            } while (1==1);
         }
 
 
         private void scorewriter()
         {
 
-             double s = scorecorrect*100/scoretrue ;
+             double s = scoreprogress*100/scoretrue ;
             string number2 = $"{((int)s)}";
             string[] result = new string[4];
             foreach (Char number in number2)
@@ -236,8 +262,6 @@ namespace Nonogram
                 {
                     
                     int y = 0;
-
-                    
 
                     foreach (string help in  numbers[x].Split("\n"))
                     {
@@ -258,15 +282,70 @@ namespace Nonogram
                 result[z] +=help;
                 z++;
             }
-            for(int i = 0;i < 4;i++)
+            Console.ForegroundColor = ConsoleColor.Blue;
+            for (int i = 0;i < 4;i++)
             {
-                Console.ForegroundColor= ConsoleColor.Blue;
+                
                 Console.SetCursorPosition(startx + width * 3 + 25, starty + height / 2 + 2+i);
-                Console.WriteLine(result[i]);
+                Console.Write(result[i]);
             }
+            
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            string[] badresult = mistakes();
+
+            for (int i = 0; i < 4; i++)
+            {
+                
+                Console.SetCursorPosition(startx + width * 3 + 25, starty + height / 2 + 8 + i);
+                Console.Write(badresult[i]);
+            }
+
+            //Console.SetCursorPosition(startx + width * 3 + 26, starty + height / 2 + 8);
+            //Console.Write("Mistakes");
+
         }
 
-        public void ConsoleGameMenu()
+        private string[] mistakes()
+        {
+            string[] result = new string[4];
+
+
+            string number2 = $"{((int)scorebad)}";
+            
+            foreach (Char number in number2)
+            {
+                if (int.TryParse(number.ToString(), out int x))
+                {
+
+                    int y = 0;
+
+                    foreach (string help in numbers[x].Split("\n"))
+                    {
+                        if(number2.Length ==1)
+                        {
+                            result[y] = "   ";
+                        }
+
+                        if (number2.Length == 2)
+                            {
+                                result[y] += " ";
+                            }
+
+                        result[y] += help + " ";
+                        y++;
+                    }
+                    
+                }
+
+            }
+
+            return result;
+        }
+
+
+        public void ConsoleInGameMenu()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             string logo=("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
@@ -274,14 +353,24 @@ namespace Nonogram
             foreach (string line in logo.Split("\n"))
             {
                 Console.SetCursorPosition(width+1, index);
-                Console.WriteLine(line);
+                Console.Write(line);
                 index++;
             }
-                
+
+            Console.SetCursorPosition(startx + width * 3 + 21, starty + height / 2 + 6);
+            Console.Write("-------------------");
+
+            Console.SetCursorPosition(startx + width * 3 + 21, starty + height / 2 + 12);
+            Console.Write("-------------------");
+
+            
+
+            
+
             for (int i = 0;i<5;i++)
             {
                 Console.SetCursorPosition(startx + width, starty + height + 16+i);
-                Console.WriteLine("║");
+                Console.Write("║");
             }
             Console.SetCursorPosition(startx + width, starty + height + 21);
             Console.Write("╚");
@@ -297,7 +386,7 @@ namespace Nonogram
             for (int i = 0; i<startx+height+5; i++) 
             {
                 Console.SetCursorPosition(startx + width*3 + 40, starty + height +i-4);
-                Console.WriteLine("║");
+                Console.Write("║");
             }
             Console.SetCursorPosition(startx + width * 3 + 40, starty + height -5);
             Console.Write("╗");
@@ -310,31 +399,223 @@ namespace Nonogram
 
             Console.SetCursorPosition(startx + width + 1, starty + height + 16);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Poprawne pola \t Niepoprawne pola");
+            Console.Write("Poprawne pola \t Niepoprawne pola");
             Console.SetCursorPosition(startx + width + 1+3, starty + height + 16+1);
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("███");
+            Console.Write("███");
             Console.SetCursorPosition(startx + width + 1 + 7, starty + height + 16 + 1);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("███");
+            Console.Write("███");
 
             Console.SetCursorPosition(startx + width + 1 + 24, starty + height + 16 + 1);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("█X█");
+            Console.Write("█X█");
             Console.SetCursorPosition(startx + width + 1 + 28, starty + height + 16 + 1);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("█X█");
+            Console.Write("█X█");
 
 
-            Console.SetCursorPosition(startx + width * 3 + 28, starty +height/2+1 );
-            Console.WriteLine("SCORE");
-            Console.SetCursorPosition(startx + width * 3 + 30, starty + height / 2 + 3);
-            //Console.WriteLine(score);
-            Console.SetCursorPosition(0, 50);
+            Console.SetCursorPosition(startx + width * 3 + 26, starty +height/2+1 );
+            Console.Write("Progress");
+
+            Console.SetCursorPosition(startx + width * 3 + 26, starty + height / 2 + 7);
+            Console.Write("Mistakes");
+
+            Console.SetCursorPosition(startx + width + 8, starty + height + 18);
+
+            Console.Write(" \t\tsterowanie");
+
+            Console.SetCursorPosition(startx + width + 6, starty + height + 19);
+            Console.Write("↑\t Niebieskie pole- SPC\tMenu- ESC");
+            Console.SetCursorPosition(startx + width + 4, starty + height + 20);
+            Console.Write("<-↓->\t Zielone pole- M");
+
+
+
+            Console.SetCursorPosition(startx + width*6 - 4, starty + height + 10);
+            Console.Write("Continue");
+            Console.SetCursorPosition(startx + width * 6 - 4, starty + height + 11);
+            Console.Write("New Game");
+            Console.SetCursorPosition(startx + width * 6 -6, starty + height + 12);
+            Console.Write("Exit to Menu");
+            Console.SetCursorPosition(startx + width * 6 - 2, starty + height + 13);
+            Console.Write("Exit");
+
+
+            Console.SetCursorPosition(0, 0);
             scorewriter();
 
             Play();
         }
+
+        public Boolean DuringGameMenu()
+        {
+            int opt = 0;
+            
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                if(opt<2)
+                Console.SetCursorPosition(startx + width * 6 - 4, starty + height + 10+opt);
+                if(opt==2)
+                    Console.SetCursorPosition(startx + width * 6 - 6, starty + height + 12);
+                if(opt==3)
+                    Console.SetCursorPosition(startx + width * 6 - 2, starty + height + 13);
+
+                keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+
+                        if (opt > 0)
+                        {
+                            opt--;
+                            
+                        }
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        if (opt < 3)
+                        {
+                            opt++;
+                        }
+                        break;
+
+                    case ConsoleKey.Enter:
+
+                        if(opt==0)
+                        {
+                            return false;
+                        }
+                        if(opt==1)
+                        {
+                            newgameinit();
+                        }
+                        if (opt == 2)
+                        {
+                            menuExit=true;
+                            return true;
+                        }
+                            
+                        if (opt==3)
+                            return true;
+                        break;
+                    case ConsoleKey.Spacebar:
+                        if (opt == 0)
+                        {
+                            return false;
+                        }
+                        if (opt == 1)
+                        {
+                            newgameinit();
+                        }
+                        if (opt == 2)
+                        {
+                            menuExit = true;
+                            return true;
+                        }
+                        if (opt == 3)
+                            return true;
+                        break;
+
+                }
+
+            } while (1==1);
+        }
+
+
+        private void newgameinit()
+        {
+
+        }
         
+        public void Menu()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            string logo = ("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
+            int index = 0;
+            foreach (string line in logo.Split("\n"))
+            {
+                Console.SetCursorPosition(width + 1, index);
+                Console.Write(line);
+                index++;
+            }
+            Console.ForegroundColor= ConsoleColor.White;
+
+            //Console.SetCursorPosition(40, 10);
+            index = 0;
+            string ng=("             __         \n|\\| _       /__ _ __  _ \n| |(/_\\^/   \\_|(_||||(/_");
+            foreach(string line in ng.Split("\n"))
+            {
+                Console.SetCursorPosition(13, 10+index);
+                Console.Write(line);
+                index++;
+            }
+            string ex = " __                     \n|_     o _|_            \n|__><  |  |_            ";
+            index = 0;
+            //Console.Write("Exit");
+
+            int opt = 0;
+
+            foreach (string line in ex.Split("\n"))
+            {
+                Console.SetCursorPosition(13, 13 + index);
+                Console.Write(line);
+                index++;
+            }
+
+            ConsoleKeyInfo keyInfo;
+            do
+            {
+                if (opt == 0)
+                    Console.SetCursorPosition(13, 12);
+                if(opt == 1)
+                    Console.SetCursorPosition(13, 15);
+
+                keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+
+                        if (opt > 0)
+                        {
+                            opt--;
+
+                        }
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        if (opt < 1)
+                        {
+                            opt++;
+                        }
+                        break;
+
+                    case ConsoleKey.Enter:
+
+                        if (opt == 0)
+                        {
+                            newgameinit();
+                        }
+                        if (opt == 1)
+                            return ;
+                        
+                        break;
+                    case ConsoleKey.Spacebar:
+                        if (opt == 0)
+                        {
+                            newgameinit();
+                        }
+                        if (opt == 1)
+                            return;
+                        break;
+
+                }
+
+            } while (1 == 1);
+
+        }
     }
 }

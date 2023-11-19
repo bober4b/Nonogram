@@ -147,7 +147,7 @@ namespace Nonogram
                     if (index)
                         left += "──";
                     else
-                        left += "xD ";
+                        left += "   ";
                 }
                 
                 return left;
