@@ -541,8 +541,7 @@ namespace Nonogram
 
         public Boolean newgameinit()
         {
-            Random random = new Random();
-            colorseter(random.Next());
+
             GameStarter();
             if(score==scoretrue) { return true; }
             return menuExit;
