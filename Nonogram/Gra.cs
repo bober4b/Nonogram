@@ -24,6 +24,8 @@ namespace Nonogram
         private int scorebad;
 
         private Boolean menuExit=false;
+        private Boolean Exit=false;
+        private Boolean initer=false;
 
         private string[] numbers = { " _ \n/ \\\n\\_/",
                                  "   \n/| \n | \n  ",
@@ -108,7 +110,7 @@ namespace Nonogram
             
         }
 
-        private void Play()
+        public void Play()
         {
             int x = startx+width+width%2+2;
             int y = starty+1+height/2+height % 2;
@@ -246,7 +248,8 @@ namespace Nonogram
                     
                 }
                 
-            } while (1==1);
+            } while (score!=scoretrue);
+            return;
         }
 
 
@@ -345,7 +348,7 @@ namespace Nonogram
         }
 
 
-        public void ConsoleInGameMenu()
+        public void GameStarter()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             string logo=("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
@@ -448,7 +451,7 @@ namespace Nonogram
             Play();
         }
 
-        public Boolean DuringGameMenu()
+        private Boolean DuringGameMenu()
         {
             int opt = 0;
             
@@ -485,30 +488,14 @@ namespace Nonogram
                     case ConsoleKey.Enter:
 
                         if(opt==0)
-                        {
-                            return false;
-                        }
-                        if(opt==1)
-                        {
-                            newgameinit();
-                        }
-                        if (opt == 2)
-                        {
-                            menuExit=true;
-                            return true;
-                        }
-                            
-                        if (opt==3)
-                            return true;
-                        break;
-                    case ConsoleKey.Spacebar:
-                        if (opt == 0)
-                        {
-                            return false;
-                        }
+                            if (opt == 0)
+                            {
+                                return false;
+                            }
                         if (opt == 1)
                         {
-                            newgameinit();
+                            initer = true;
+                            return true;
                         }
                         if (opt == 2)
                         {
@@ -516,7 +503,34 @@ namespace Nonogram
                             return true;
                         }
                         if (opt == 3)
+                        {
+                            Exit = true;
                             return true;
+                        }
+                        break;
+
+
+                    case ConsoleKey.Spacebar:
+                        if (opt == 0)
+                        {
+                            return false;
+                        }
+                        if (opt == 1)
+                        {
+                            initer=true;
+                            return true;
+                        }
+                        if (opt == 2)
+                        {
+                            menuExit = true;
+                            return true;
+                        }
+                        if (opt == 3)
+                        {
+                            Exit = true;
+                            return true;
+                        }
+                           
                         break;
 
                 }
@@ -525,12 +539,16 @@ namespace Nonogram
         }
 
 
-        private void newgameinit()
+        public Boolean newgameinit()
         {
-
+            Random random = new Random();
+            colorseter(random.Next());
+            GameStarter();
+            if(score==scoretrue) { return true; }
+            return menuExit;
         }
         
-        public void Menu()
+        /*public void Menu()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             string logo = ("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
@@ -597,7 +615,7 @@ namespace Nonogram
 
                         if (opt == 0)
                         {
-                            newgameinit();
+                            //newgameinit();
                         }
                         if (opt == 1)
                             return ;
@@ -606,7 +624,7 @@ namespace Nonogram
                     case ConsoleKey.Spacebar:
                         if (opt == 0)
                         {
-                            newgameinit();
+                            //newgameinit();
                         }
                         if (opt == 1)
                             return;
@@ -616,6 +634,16 @@ namespace Nonogram
 
             } while (1 == 1);
 
+        }*/
+
+        public Boolean endgame()
+        {
+            return Exit;
+        }
+
+        public Boolean newgamer()
+        {
+            return initer;
         }
     }
 }
