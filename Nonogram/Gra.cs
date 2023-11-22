@@ -111,8 +111,6 @@ namespace Nonogram
             string number = $"{((int)toscore)}";
             scoreview.scorewrite(number,score.scorebad);
 
-
-
         }
  
 
