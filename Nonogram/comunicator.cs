@@ -11,12 +11,14 @@ namespace Nonogram
         public Boolean menuExit { get; set; }
         public Boolean Exit { get; set; }
         public Boolean initer { get; set; }
+        public Boolean Saver { get; set; }
 
         public Comunicator()
         {
             menuExit = false;
             Exit = false;
             initer = false;
+            Saver = false;
         }
 
     }

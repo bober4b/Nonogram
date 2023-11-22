@@ -44,17 +44,23 @@ namespace Nonogram
         {
             return answered;
         }
+
+        public void setanswered(Boolean answered)
+        {
+            this.answered=answered;
+        }
+        public void set_answer(Boolean _answer)
+        {
+             this._answer=_answer;
+        }
+        public Boolean get_answer()
+        {
+            return _answer;
+        }
         
         public override string ToString()
         {
-            if (!answered)
-                return "███";
-            else
-            {
-                if (_answer == true)
-                    return "███";
-                else return "█X█";
-            }
+            return $"{color},{answered},{_answer}";
         }
         
     }

@@ -13,6 +13,8 @@ namespace Nonogram
     {
         private string[] widthstring;
         private Hinter hinter;
+
+        private Fieldseter fieldseter=new();
         
 
         public void gameTable(int height, int width)
@@ -72,6 +74,7 @@ namespace Nonogram
             {
                 for (int j = 0; j < width * 2; j++)
                 {
+                    
                     if (j % 2 == 0)
                         widthstring[currentPosition] += "║";
                     else
@@ -110,14 +113,10 @@ namespace Nonogram
                 }
             }
 
-            // Wyświetlanie całej tablicy
-            /*foreach (string line in widthstring)
-            {
-                Console.Write(line);
-            }*/
+            
         
         }
-        public void gametableView(int startx,int starty)
+        public void gametableView(int startx,int starty,bool loaded, Field[,] field)
         {
             Console.Clear();
             int z = 0;
@@ -127,8 +126,47 @@ namespace Nonogram
                 Console.SetCursorPosition(startx,starty+z);
                 
                 z++;
-                Console.WriteLine(line);
+                Console.Write(line);
             }
+            if(loaded)
+            {
+                for (int i = 0; i < 10; i++)
+                    for (int j = 0; j < 10; j++)
+                    {
+                        if (field[i, j].answer())
+                        {
+                            if (field[i, j].get_answer())
+                            {
+                                if (field[i, j].getcolor())
+                                {
+                                    fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.DarkBlue);
+                                }
+                                else
+                                {
+                                    fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.Green);
+                                }
+                            }
+                            else
+                            {
+                                
+                                    if (field[i, j].getcolor())
+                                    {
+                                        fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.DarkGray);
+                                    }
+                                    else
+                                    {
+                                        fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.Red);
+                                    }
+                                
+                            }
+                        }
+                        else
+                        {
+                            fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.White);
+                        }
+                    }
+            }
+          
 
             string star = " ##   ## \n  ## ##  \n#########\n  ## ##  \n ##   ## ";
             Console.SetCursorPosition(10, 10);
@@ -232,11 +270,13 @@ namespace Nonogram
 
             Console.SetCursorPosition(startx + position * 6 - 4, starty + position + 10);
             Console.Write("Continue");
-            Console.SetCursorPosition(startx + position * 6 - 4, starty + position + 11);
+            Console.SetCursorPosition(startx + position * 6 - 2, starty + position + 11);
+            Console.Write("Save");
+            Console.SetCursorPosition(startx + position * 6 - 4, starty + position + 12);
             Console.Write("New Game");
-            Console.SetCursorPosition(startx + position * 6 - 6, starty + position + 12);
+            Console.SetCursorPosition(startx + position * 6 - 6, starty + position + 13);
             Console.Write("Exit to Menu");
-            Console.SetCursorPosition(startx + position * 6 - 2, starty + position + 13);
+            Console.SetCursorPosition(startx + position * 6 - 2, starty + position + 14);
             Console.Write("Exit");
         }
 

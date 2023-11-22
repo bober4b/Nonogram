@@ -41,8 +41,10 @@ namespace Nonogram
                         Console.SetCursorPosition(11, 12);
                     if (opt == 1)
                         Console.SetCursorPosition(11, 15);
+                    if (opt == 2)
+                        Console.SetCursorPosition(11, 18);
 
-                    keyInfo = Console.ReadKey(true);
+                        keyInfo = Console.ReadKey(true);
 
                     switch (keyInfo.Key)
                     {
@@ -56,7 +58,7 @@ namespace Nonogram
                             break;
 
                         case ConsoleKey.DownArrow:
-                            if (opt < 1)
+                            if (opt < 2)
                             {
                                 opt++;
                             }
@@ -70,6 +72,8 @@ namespace Nonogram
 
                             }
                             if (opt == 1)
+                                Loadgame();
+                            if (opt == 2)
                                 return;
 
                             break;
@@ -78,7 +82,11 @@ namespace Nonogram
                             {
                                 newgame();
                             }
-                            if (opt == 1)
+                            if(opt==1)
+                            {
+                                Loadgame();
+                            }
+                            if (opt == 2)
                                 return;
                             break;
 
@@ -95,6 +103,19 @@ namespace Nonogram
             toMenu = gra.newgameinit();
             Exit = gra.endgame();
             newGame = gra.newgamer();
+            _view.view();
+
+        }
+
+        private void Loadgame(string filename= "Continue.txt")
+        {
+            Console.SetCursorPosition(10, 10);
+            Gra gra = new Gra(filename);
+            toMenu = gra.newgameinit();
+            Exit = gra.endgame();
+            newGame = gra.newgamer();
+            gra.gameSaver();
+            _view.view();
         }
     }
 

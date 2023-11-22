@@ -33,7 +33,23 @@ namespace Nonogram
             }
             string ex = " __                     \n|_     o _|_            \n|__><  |  |_            ";
             index = 0;
-            //Console.Write("Exit");
+            
+            string lg="|   _  _  _|   /__ _ __  _ \n|__(_)(_|(_|   \\_|(_||||(/_";
+
+            foreach (string line in lg.Split("\n"))
+            {
+
+
+
+                Console.SetCursorPosition(12, 14 + index);
+                Console.Write(line);
+                index++;
+            }
+
+            
+
+            index = 0;
+
 
 
             foreach (string line in ex.Split("\n"))
@@ -41,7 +57,7 @@ namespace Nonogram
 
 
 
-                Console.SetCursorPosition(12, 13 + index);
+                Console.SetCursorPosition(12, 16 + index);
                 Console.Write(line);
                 index++;
             }

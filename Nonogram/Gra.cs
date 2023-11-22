@@ -16,14 +16,15 @@ namespace Nonogram
         private int startx=10;
         private int starty=10;
 
+        private Boolean loaded=false;
+
         Score score=new Score();
 
         private Comunicator comunicator=new Comunicator();
 
-        
-
-
         private static Field[,] field;
+
+
         private static GameField gameField=new();
         private Scoreview scoreview=new();
 
@@ -37,14 +38,23 @@ namespace Nonogram
                 {
                     field[i, j] = new Field();
                 }
-            Console.SetCursorPosition(startx,starty);
 
             Random rnd = new Random();
             if(seed==0)
             seed = rnd.Next();
             colorseter(seed);
-            
-            
+            score.scoreprogress = 0;
+
+
+        }
+
+        public Gra(string filename)
+        {
+            height = 10;
+            width = 10;
+            loaded = true;
+            field = new Field[height, width];
+            gamecontinuesave(filename);
         }
 
         private void colorseter(int seed)
@@ -73,11 +83,12 @@ namespace Nonogram
 
             gameField.GamehintTable(field);
             gameField.gameTable(height, width);
-            gameField.gametableView(startx,starty);
+            gameField.gametableView(startx,starty,loaded,field);
+            loaded = false;
 
 
 
-            score.scoreprogress = 0;
+            
 
             scoreupdate();
 
@@ -98,8 +109,14 @@ namespace Nonogram
                 {
                     return;
                 }
+
+                if(comunicator.Saver)
+                {
+                    gameSaver();
+                    comunicator.Saver = false;
+                }
                 
-            } while (score.score!=score.scoretrue);
+            } while (score.scoreprogress!=score.scoretrue);
             return;
         }
 
@@ -135,5 +152,101 @@ namespace Nonogram
         {
             return comunicator.initer;
         }
+
+        public void gameSaver()
+        {
+            string filepath = "continue.txt";
+
+            string result = "";
+            for(int i = 0; i < 10; i++) 
+            {
+                for(int j = 0; j < 10; j++)
+                {
+                    result += $"{field[i, j].ToString()}";
+                    if(j<9)
+                    {
+                        result += ",";
+                    }
+                }
+                result += "\n";
+            }
+            result +=score.ToString();
+
+            File.WriteAllText(filepath,result);
+
+
+        }
+
+        public void gamecontinuesave(string path="continue.txt")
+        {
+            string result = File.ReadAllText(path);
+
+            int z=0 ;
+            int i = 0;
+            foreach(string line  in result.Split("\n"))
+            {
+                int j = 0;
+                int k = 0;
+                foreach (string line2 in line.Split(","))
+                {if (j % 3 == 0&& i!=10)
+                        field[i, k] = new Field();
+                    if (i <= 9)
+                    {
+                        bool boolvalue;
+                        if (bool.TryParse(line2, out boolvalue))
+                        {
+
+
+                            if(j%3==0)
+                            field[i, k].setcolor(boolvalue);
+
+                            if (j % 3 == 1)
+                                field[i, k].setanswered(boolvalue);
+
+                            if (j % 3 == 2)
+                                field[i, k].set_answer(boolvalue);
+                            
+                        }
+                        
+                        j++;
+                        if (j % 3 == 0)
+                            k++;
+                    }
+                    else
+                    {
+                        int intvalue;
+                        if(int.TryParse(line2,out intvalue))
+                        {
+                            switch(z)
+                            {
+                                case 0:
+                                    score.scoretrue = intvalue;
+                                    break;
+                                case 1:
+                                    score.scoreall = intvalue;
+                                    break;
+                                case 2:
+                                    score.scorecorrect = intvalue;
+                                    break;
+                                case 3:
+                                    score.scoreprogress=intvalue;
+                                    break;
+                                case 4:
+                                    score.score=intvalue;
+                                    break;
+                                case 5:
+                                    score.scorebad = intvalue;
+                                    break;
+
+                            }
+
+                        }
+                        z++;
+                    }
+                }
+                i++;
+            }
+        }
+        
     }
 }

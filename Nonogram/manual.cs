@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
-
+//controler/manual
 namespace Nonogram
 {
     public class Manual
@@ -165,12 +165,16 @@ namespace Nonogram
             ConsoleKeyInfo keyInfo;
             do
             {
-                if (opt < 2)
-                    Console.SetCursorPosition( position + width * 6 - 4, position + height + 10 + opt);
+                if (opt == 0)
+                    Console.SetCursorPosition( position + width * 6 - 4, position + height + 10 );
+                if (opt == 1)
+                    Console.SetCursorPosition(position + width * 6 - 2, position + height + 11);
                 if (opt == 2)
-                    Console.SetCursorPosition(position + width * 6 - 6, position + height + 12);
+                    Console.SetCursorPosition(position + width * 6 - 4, position + height + 12);
                 if (opt == 3)
-                    Console.SetCursorPosition(position + width * 6 - 2, position + height + 13);
+                    Console.SetCursorPosition(position + width * 6 - 6, position + height + 13);
+                if (opt == 4)
+                    Console.SetCursorPosition(position + width * 6 - 2, position + height + 14);
 
                 keyInfo = Console.ReadKey(true);
 
@@ -186,7 +190,7 @@ namespace Nonogram
                         break;
 
                     case ConsoleKey.DownArrow:
-                        if (opt < 3)
+                        if (opt < 4)
                         {
                             opt++;
                         }
@@ -201,15 +205,20 @@ namespace Nonogram
                             }
                         if (opt == 1)
                         {
-                            comunicator.initer = true;
-                            return true;
+                            comunicator.Saver = true;
+                            break ;
                         }
                         if (opt == 2)
+                        {
+                            comunicator.initer = true;
+                            return false;
+                        }
+                        if (opt == 3)
                         {
                             comunicator.menuExit = true;
                             return true;
                         }
-                        if (opt == 3)
+                        if (opt == 4)
                         {
                             comunicator.Exit = true;
                             return true;
@@ -222,17 +231,22 @@ namespace Nonogram
                         {
                             return false;
                         }
-                        if (opt == 1)
+                        if ( opt==1 )
+                        {
+                            comunicator.Saver= true;
+                            break;
+                        }
+                        if (opt == 2)
                         {
                             comunicator.initer = true;
                             return true;
                         }
-                        if (opt == 2)
+                        if (opt == 3)
                         {
                             comunicator.menuExit = true;
                             return true;
                         }
-                        if (opt == 3)
+                        if (opt == 4)
                         {
                             comunicator.Exit = true;
                             return true;

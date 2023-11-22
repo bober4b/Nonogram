@@ -14,5 +14,10 @@ namespace Nonogram
         public int scoreprogress { get; set; }
         public int score { get; set; }
         public int scorebad { get; set; }
+
+        public override string ToString()
+        {
+            return $"{scoretrue},{scoreall},{scorecorrect},{scoreprogress},{score},{scorebad}";
+        }
     }
 }
