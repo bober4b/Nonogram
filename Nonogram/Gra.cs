@@ -99,6 +99,12 @@ namespace Nonogram
 
             do
             {
+                if (comunicator.Saver)
+                {
+                    gameSaver();
+                    comunicator.Saver = false;
+                }
+
                 result = manual.controlsgame();
                 if (result[1])
                 {
@@ -110,11 +116,7 @@ namespace Nonogram
                     return;
                 }
 
-                if(comunicator.Saver)
-                {
-                    gameSaver();
-                    comunicator.Saver = false;
-                }
+                
                 
             } while (score.scoreprogress!=score.scoretrue);
             return;
@@ -162,7 +164,7 @@ namespace Nonogram
             {
                 for(int j = 0; j < 10; j++)
                 {
-                    result += $"{field[i, j].ToString()}";
+                    result += $"{field[i, j]}";
                     if(j<9)
                     {
                         result += ",";

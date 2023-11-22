@@ -31,17 +31,17 @@ namespace Nonogram
                 Console.Write(line);
                 index++;
             }
-            string ex = " __                     \n|_     o _|_            \n|__><  |  |_            ";
+            string ex = " __                     \n|_    o _|_            \n|__>< |  |_            ";
             index = 0;
             
-            string lg="|   _  _  _|   /__ _ __  _ \n|__(_)(_|(_|   \\_|(_||||(/_";
+            string lg= "                __          \n|   _  _  _|   /__ _ __  _ \n|__(_)(_|(_|   \\_|(_||||(/_";
 
             foreach (string line in lg.Split("\n"))
             {
 
 
 
-                Console.SetCursorPosition(12, 14 + index);
+                Console.SetCursorPosition(12, 13 + index);
                 Console.Write(line);
                 index++;
             }
