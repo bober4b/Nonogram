@@ -15,10 +15,10 @@ namespace Nonogram
 
         public Hinter(Field[,] field )
         {
-            hintseterTop(field);
-            hintseterLeft(field);
+            HintseterTop(field);
+            HintseterLeft(field);
         }
-        private void hintseterTop(Field[,] field)
+        private void HintseterTop(Field[,] field)
         {
             hintListTop = new string[field.GetLength(0) / 2 + field.Length % 2, field.GetLength(1)];
 
@@ -30,7 +30,7 @@ namespace Nonogram
                 //string numberstring = "";
                 for (int j = 0; j < field.GetLength(0); j++)
                 {
-                    if (field[j, i].getcolor())
+                    if (field[j, i].Getcolor())
                     {
                         numbertop++;
 
@@ -55,7 +55,7 @@ namespace Nonogram
                 //hintListTop[i] = numberstring;
             }
         }
-        public string[] hintGeterTop(int index)
+        public string[] HintGeterTop(int index)
         {
             string[] result = new string[hintListTop.GetLength(1)];
             for (int i = 0; i < hintListTop.GetLength(1); i++)
@@ -70,7 +70,7 @@ namespace Nonogram
             return result;
 
         }
-        private void hintseterLeft(Field[,] field)
+        private void HintseterLeft(Field[,] field)
         {
             hintListLeft = new string[ field.GetLength(0) , field.GetLength(1)/2+field.GetLength(1)%2];
 
@@ -82,7 +82,7 @@ namespace Nonogram
                 //string numberstring = "";
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if (field[i, j].getcolor())
+                    if (field[i, j].Getcolor())
                     {
                         numberleft++;
 
@@ -109,7 +109,7 @@ namespace Nonogram
 
         }
 
-        public string[] hintGeterLeft(int index)
+        public string[] HintGeterLeft(int index)
         {
             string[] result = new string[hintListLeft.GetLength(1)];
             for (int i = 0; i < hintListLeft.GetLength(1); i++)

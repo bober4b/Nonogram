@@ -8,7 +8,7 @@ namespace Nonogram
 {
     public class Scoreview
     {
-        private string[] numbers = { " _ \n/ \\\n\\_/",
+        private readonly string[] numbers = { " _ \n/ \\\n\\_/",
                                  "   \n/| \n | \n  ",
                                  "__ \n _)\n/__",
                                  "__ \n__)\n__)",
@@ -19,7 +19,7 @@ namespace Nonogram
                                  " _ \n(_)\n(_)",
                                  " _ \n(_|\n _|",
                                  " \nO/ \n/O"};
-        public void scorewrite(string score, int scorebad)
+        public void Scorewrite(string score, int scorebad)
         {
 
 
@@ -61,7 +61,7 @@ namespace Nonogram
 
             Console.ForegroundColor = ConsoleColor.Red;
 
-            string[] badresult = mistakes(scorebad);
+            string[] badresult = Mistakes(scorebad);
 
             for (int i = 0; i < 4; i++)
             {
@@ -74,7 +74,7 @@ namespace Nonogram
 
         }
 
-        private string[] mistakes(int scorebad)
+        private string[] Mistakes(int scorebad)
         {
             string[] result = new string[4];
 

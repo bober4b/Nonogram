@@ -10,23 +10,22 @@ namespace Nonogram
 
     public class Gra
     {
-        private int height;
-        private int width;
+        private readonly int height;
+        private readonly int width;
 
-        private int startx=10;
-        private int starty=10;
+        private readonly int startx=10;
+        private readonly int starty=10;
 
         private Boolean loaded=false;
+        private readonly Scoremodule score=new();
 
-        Score score=new Score();
+        private readonly Comunicator comunicator=new();
 
-        private Comunicator comunicator=new Comunicator();
-
-        private static Field[,] field;
+        private readonly Field[,] field;
 
 
-        private static GameField gameField=new();
-        private Scoreview scoreview=new();
+        private readonly GameField gameField=new();
+        private readonly Scoreview scoreview=new();
 
         public Gra(int seed=0)
         {
@@ -39,11 +38,11 @@ namespace Nonogram
                     field[i, j] = new Field();
                 }
 
-            Random rnd = new Random();
+            Random rnd = new();
             if(seed==0)
             seed = rnd.Next();
-            colorseter(seed);
-            score.scoreprogress = 0;
+            Colorseter(seed);
+            score.Scoreprogress = 0;
 
 
         }
@@ -54,26 +53,26 @@ namespace Nonogram
             width = 10;
             loaded = true;
             field = new Field[height, width];
-            gamecontinuesave(filename);
+            Gamecontinuesave(filename);
         }
 
-        private void colorseter(int seed)
+        private void Colorseter(int seed)
         {
 
-            score.scoreall=height*width;
-            score.scorecorrect = 0;
-            score.scorebad = 0;
-            Random rnd = new Random(seed);
+            score.Scoreall=height*width;
+            score.Scorecorrect = 0;
+            score.Scorebad = 0;
+            Random rnd = new(seed);
             for(int i = 0; i < height;i++)
                 for(int k = 0; k < width;k++)
                 {
                     if (rnd.NextDouble()<0.6)
                     {
-                        field[i, k].setcolor(true);
-                        score.scoretrue++;
+                        field[i, k].Setcolor(true);
+                        score.Scoretrue++;
                     }
                     else
-                        field[i, k].setcolor(false);
+                        field[i, k].Setcolor(false);
                 }
         }
         
@@ -82,17 +81,17 @@ namespace Nonogram
         {    
 
             gameField.GamehintTable(field);
-            gameField.gameTable(height, width);
-            gameField.gametableView(startx,starty,loaded,field);
+            gameField.GameTable(height, width);
+            gameField.GametableView(startx,starty,loaded,field);
             loaded = false;
 
 
 
             
 
-            scoreupdate();
+            Scoreupdate();
 
-            Manual manual=new Manual(width,height,field,score,comunicator);
+            Manual manual=new(width,height,field,score,comunicator);
             
             bool[] result;
             
@@ -101,14 +100,14 @@ namespace Nonogram
             {
                 if (comunicator.Saver)
                 {
-                    gameSaver();
+                    GameSaver();
                     comunicator.Saver = false;
                 }
 
-                result = manual.controlsgame();
+                result = manual.Controlsgame();
                 if (result[1])
                 {
-                    scoreupdate();
+                    Scoreupdate();
                 }
 
                 if (!result[0])
@@ -118,44 +117,44 @@ namespace Nonogram
 
                 
                 
-            } while (score.scoreprogress!=score.scoretrue);
+            } while (score.Scoreprogress!=score.Scoretrue);
             return;
         }
 
 
-        private void scoreupdate()
+        private void Scoreupdate()
         {
 
-            double toscore = score.scoreprogress * 100 / score.scoretrue;
+            double toscore = score.Scoreprogress * 100 / score.Scoretrue;
             string number = $"{((int)toscore)}";
-            scoreview.scorewrite(number,score.scorebad);
+            scoreview.Scorewrite(number,score.Scorebad);
 
         }
  
 
-        public Boolean newgameinit()
+        public Boolean Newgameinit()
         {
 
-            scoreupdate();
+            Scoreupdate();
 
             Play();
-            if (score.score==score.scoretrue) { return true; }
-            return comunicator.menuExit;
+            if (score.Score==score.Scoretrue) { return true; }
+            return comunicator.MenuExit;
         }
         
         
 
-        public Boolean endgame()
+        public Boolean Endgame()
         {
             return comunicator.Exit;
         }
 
-        public Boolean newgamer()
+        public Boolean Newgamer()
         {
-            return comunicator.initer;
+            return comunicator.Initer;
         }
 
-        public void gameSaver()
+        public void GameSaver()
         {
             string filepath = "continue.txt";
 
@@ -179,7 +178,7 @@ namespace Nonogram
 
         }
 
-        public void gamecontinuesave(string path="continue.txt")
+        public void Gamecontinuesave(string path="continue.txt")
         {
             string result = File.ReadAllText(path);
 
@@ -194,50 +193,48 @@ namespace Nonogram
                         field[i, k] = new Field();
                     if (i <= 9)
                     {
-                        bool boolvalue;
-                        if (bool.TryParse(line2, out boolvalue))
+                        if (bool.TryParse(line2, out bool boolvalue))
                         {
 
 
-                            if(j%3==0)
-                            field[i, k].setcolor(boolvalue);
+                            if (j % 3 == 0)
+                                field[i, k].Setcolor(boolvalue);
 
                             if (j % 3 == 1)
-                                field[i, k].setanswered(boolvalue);
+                                field[i, k].Setanswered(boolvalue);
 
                             if (j % 3 == 2)
-                                field[i, k].set_answer(boolvalue);
-                            
+                                field[i, k].Set_answer(boolvalue);
+
                         }
-                        
+
                         j++;
                         if (j % 3 == 0)
                             k++;
                     }
                     else
                     {
-                        int intvalue;
-                        if(int.TryParse(line2,out intvalue))
+                        if (int.TryParse(line2, out int intvalue))
                         {
-                            switch(z)
+                            switch (z)
                             {
                                 case 0:
-                                    score.scoretrue = intvalue;
+                                    score.Scoretrue = intvalue;
                                     break;
                                 case 1:
-                                    score.scoreall = intvalue;
+                                    score.Scoreall = intvalue;
                                     break;
                                 case 2:
-                                    score.scorecorrect = intvalue;
+                                    score.Scorecorrect = intvalue;
                                     break;
                                 case 3:
-                                    score.scoreprogress=intvalue;
+                                    score.Scoreprogress = intvalue;
                                     break;
                                 case 4:
-                                    score.score=intvalue;
+                                    score.Score = intvalue;
                                     break;
                                 case 5:
-                                    score.scorebad = intvalue;
+                                    score.Scorebad = intvalue;
                                     break;
 
                             }

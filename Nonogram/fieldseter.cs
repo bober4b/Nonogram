@@ -10,7 +10,7 @@ namespace Nonogram
 {
     public class Fieldseter
     {
-        public void set(int x, int y,bool answer, ConsoleColor color)
+        public static void Set(int x, int y,bool answer, ConsoleColor color)
         {
             if (answer)
             {

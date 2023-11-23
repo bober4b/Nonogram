@@ -8,7 +8,7 @@ namespace Nonogram
 {
     public class MenuView
     {
-        public void view()
+        public static void View()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -61,6 +61,15 @@ namespace Nonogram
                 Console.Write(line);
                 index++;
             }
+        }
+        public static void Options(int opt)
+        {
+            if (opt == 0)
+                Console.SetCursorPosition(11, 12);
+            if (opt == 1)
+                Console.SetCursorPosition(11, 15);
+            if (opt == 2)
+                Console.SetCursorPosition(11, 18);
         }
     }
 }

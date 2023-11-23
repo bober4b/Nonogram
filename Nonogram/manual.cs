@@ -10,23 +10,23 @@ namespace Nonogram
 {
     public class Manual
     {
-        private int width;
-        private int height;
+        private readonly int width;
+        private readonly int height;
 
-        private Field[,] field;
-        private Score score;
-        private Comunicator comunicator;
+        private readonly Field[,] field;
+        private readonly Scoremodule score;
+        private readonly Comunicator comunicator;
 
-        private Fieldseter fieldset;
+        private readonly Fieldseter fieldset;
 
         private int x;
         private int y;
         private int arrayx ;
         private int arrayy ;
-        private int leftview;
-        private int topview;
+        private readonly int leftview;
+        private readonly int topview;
 
-        public Manual(int width, int height, Field[,] field, Score score,Comunicator comunicator)
+        public Manual(int width, int height, Field[,] field, Scoremodule score,Comunicator comunicator)
         {
             this.width = width;
             this.height = height;
@@ -43,7 +43,7 @@ namespace Nonogram
             leftview = 10 + width + width % 2 + 4;
             topview = 10 + 1 + height / 2 + height % 2;
         }
-        public Boolean[] controlsgame()
+        public Boolean[] Controlsgame()
         {
 
 
@@ -96,23 +96,23 @@ namespace Nonogram
 
                     break;
                 case ConsoleKey.Spacebar:
-                    if (!field[arrayy, arrayx].answer())
+                    if (!field[arrayy, arrayx].Answer())
                     {
-                        if (field[arrayy, arrayx].iscolor(true))
+                        if (field[arrayy, arrayx].Iscolor(true))
                         {
 
 
-                            score.scorecorrect++;
-                            score.score++;
-                            score.scoreprogress++;
+                            score.Scorecorrect++;
+                            score.Score++;
+                            score.Scoreprogress++;
 
-                            fieldset.set(x, y, true, ConsoleColor.DarkBlue);
+                            Fieldseter.Set(x, y, true, ConsoleColor.DarkBlue);
                         }
                         else
                         {
                             
-                            score.scorebad++;
-                            fieldset.set(x, y, false, ConsoleColor.Red);
+                            score.Scorebad++;
+                            Fieldseter.Set(x, y, false, ConsoleColor.Red);
 
                         }
 
@@ -120,23 +120,23 @@ namespace Nonogram
                     }
                     break;
                 case ConsoleKey.M:
-                    if (!field[arrayy, arrayx].answer())
+                    if (!field[arrayy, arrayx].Answer())
                     {
-                        if (field[arrayy, arrayx].iscolor(false))
+                        if (field[arrayy, arrayx].Iscolor(false))
                         {
 
-                            score.score++;
+                            score.Score++;
 
-                            fieldset.set(x,y,true, ConsoleColor.Green);
+                            Fieldseter.Set(x,y,true, ConsoleColor.Green);
 
                         }
                         else
                         {
 
 
-                            score.scorebad++;
-                            score.scoreprogress++;
-                            fieldset.set(x,y, false, ConsoleColor.DarkGray);
+                            score.Scorebad++;
+                            score.Scoreprogress++;
+                            Fieldseter.Set(x,y, false, ConsoleColor.DarkGray);
 
                         }
 
@@ -160,21 +160,12 @@ namespace Nonogram
         private Boolean DuringGameMenu()
         {
             int opt = 0;
-            int position = 10;
+            MenuingameView menuingameView = new();
 
             ConsoleKeyInfo keyInfo;
             do
             {
-                if (opt == 0)
-                    Console.SetCursorPosition( position + width * 6 - 4, position + height + 10 );
-                if (opt == 1)
-                    Console.SetCursorPosition(position + width * 6 - 2, position + height + 11);
-                if (opt == 2)
-                    Console.SetCursorPosition(position + width * 6 - 4, position + height + 12);
-                if (opt == 3)
-                    Console.SetCursorPosition(position + width * 6 - 6, position + height + 13);
-                if (opt == 4)
-                    Console.SetCursorPosition(position + width * 6 - 2, position + height + 14);
+                menuingameView.Options(opt);
 
                 keyInfo = Console.ReadKey(true);
 
@@ -210,12 +201,12 @@ namespace Nonogram
                         }
                         if (opt == 2)
                         {
-                            comunicator.initer = true;
+                            comunicator.Initer = true;
                             return false;
                         }
                         if (opt == 3)
                         {
-                            comunicator.menuExit = true;
+                            comunicator.MenuExit = true;
                             return true;
                         }
                         if (opt == 4)
@@ -238,12 +229,12 @@ namespace Nonogram
                         }
                         if (opt == 2)
                         {
-                            comunicator.initer = true;
+                            comunicator.Initer = true;
                             return true;
                         }
                         if (opt == 3)
                         {
-                            comunicator.menuExit = true;
+                            comunicator.MenuExit = true;
                             return true;
                         }
                         if (opt == 4)
@@ -257,6 +248,27 @@ namespace Nonogram
                 }
 
             } while (1 == 1);
+        }
+    }
+    //View
+    public class MenuingameView
+    {
+        private readonly int position = 10;
+        private readonly int width = 10;
+        private readonly int height = 10;
+        public void Options(int opt)
+        {
+
+            if (opt == 0)
+                Console.SetCursorPosition(position + width * 6 - 4, position + height + 10);
+            if (opt == 1)
+                Console.SetCursorPosition(position + width * 6 - 2, position + height + 11);
+            if (opt == 2)
+                Console.SetCursorPosition(position + width * 6 - 4, position + height + 12);
+            if (opt == 3)
+                Console.SetCursorPosition(position + width * 6 - 6, position + height + 13);
+            if (opt == 4)
+                Console.SetCursorPosition(position + width * 6 - 2, position + height + 14);
         }
     }
 }

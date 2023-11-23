@@ -8,16 +8,16 @@ namespace Nonogram
 {
     public class Comunicator
     {
-        public Boolean menuExit { get; set; }
+        public Boolean MenuExit { get; set; }
         public Boolean Exit { get; set; }
-        public Boolean initer { get; set; }
+        public Boolean Initer { get; set; }
         public Boolean Saver { get; set; }
 
         public Comunicator()
         {
-            menuExit = false;
+            MenuExit = false;
             Exit = false;
-            initer = false;
+            Initer = false;
             Saver = false;
         }
 

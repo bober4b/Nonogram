@@ -24,36 +24,36 @@ namespace Nonogram
             this.color = color;
             answered = false; 
         }
-        public Boolean iscolor(Boolean color)
+        public Boolean Iscolor(Boolean color)
         {
             answered = true;
             if (this.color == color)
             { _answer = true; return true; }
             else { _answer = false; return false; }
         }
-        public void setcolor(Boolean color) 
+        public void Setcolor(Boolean color) 
         {
             this.color = color;
         }
-        public Boolean getcolor()
+        public Boolean Getcolor()
         {
             return this.color;
         }
 
-        public Boolean answer()
+        public Boolean Answer()
         {
             return answered;
         }
 
-        public void setanswered(Boolean answered)
+        public void Setanswered(Boolean answered)
         {
             this.answered=answered;
         }
-        public void set_answer(Boolean _answer)
+        public void Set_answer(Boolean _answer)
         {
              this._answer=_answer;
         }
-        public Boolean get_answer()
+        public Boolean Get_answer()
         {
             return _answer;
         }

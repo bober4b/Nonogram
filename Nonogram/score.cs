@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 //module
 namespace Nonogram
 {
-    public class Score
+    public class Scoremodule
     {
-        public int scoretrue { get; set; }
-        public int scoreall { get; set; }
-        public int scorecorrect { get; set; }
-        public int scoreprogress { get; set; }
-        public int score { get; set; }
-        public int scorebad { get; set; }
+        public int Scoretrue { get; set; }
+        public int Scoreall { get; set; }
+        public int Scorecorrect { get; set; }
+        public int Scoreprogress { get; set; }
+        public int Score { get; set; }
+        public int Scorebad { get; set; }
 
         public override string ToString()
         {
-            return $"{scoretrue},{scoreall},{scorecorrect},{scoreprogress},{score},{scorebad}";
+            return $"{Scoretrue},{Scoreall},{Scorecorrect},{Scoreprogress},{Score},{Scorebad}";
         }
     }
 }

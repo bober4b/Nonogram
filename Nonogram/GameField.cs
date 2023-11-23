@@ -11,13 +11,13 @@ namespace Nonogram
     
     public  class GameField
     {
-        private string[] widthstring;
+        private string[]? widthstring;
         private Hinter hinter;
 
-        private Fieldseter fieldseter=new();
+        private readonly Fieldseter fieldseter=new();
         
 
-        public void gameTable(int height, int width)
+        public void GameTable(int height, int width)
         {
             // Inicjalizacja widthstring jako tablicy
             widthstring = new string[27];
@@ -27,7 +27,7 @@ namespace Nonogram
             // Aktualna pozycja w tablicy widthstring
             int currentPosition = 0;
             for (int i = 0;i<height/2;i++)
-            {string[] help=hinter.hintGeterTop(i);
+            {string[] help=hinter.HintGeterTop(i);
                 for (int j = 0; j < width+width%2; j++)
                     widthstring[currentPosition] += " ";
 
@@ -116,7 +116,7 @@ namespace Nonogram
             
         
         }
-        public void gametableView(int startx,int starty,bool loaded, Field[,] field)
+        public void GametableView(int startx,int starty,bool loaded, Field[,] field)
         {
             Console.Clear();
             int z = 0;
@@ -133,36 +133,36 @@ namespace Nonogram
                 for (int i = 0; i < 10; i++)
                     for (int j = 0; j < 10; j++)
                     {
-                        if (field[i, j].answer())
+                        if (field[i, j].Answer())
                         {
-                            if (field[i, j].get_answer())
+                            if (field[i, j].Get_answer())
                             {
-                                if (field[i, j].getcolor())
+                                if (field[i, j].Getcolor())
                                 {
-                                    fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.DarkBlue);
+                                    Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.DarkBlue);
                                 }
                                 else
                                 {
-                                    fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.Green);
+                                    Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.Green);
                                 }
                             }
                             else
                             {
                                 
-                                    if (field[i, j].getcolor())
+                                    if (field[i, j].Getcolor())
                                     {
-                                        fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.DarkGray);
+                                    Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.DarkGray);
                                     }
                                     else
                                     {
-                                        fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.Red);
+                                    Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.Red);
                                     }
                                 
                             }
                         }
                         else
                         {
-                            fieldseter.set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.White);
+                            Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, true, ConsoleColor.White);
                         }
                     }
             }
@@ -307,7 +307,7 @@ namespace Nonogram
 
 
             
-                help = hinter.hintGeterLeft(current);
+                help = hinter.HintGeterLeft(current);
             
             for (int i=0; i < height/2+height%2; i++)
             { 

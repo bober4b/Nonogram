@@ -9,13 +9,13 @@ namespace Nonogram
 {
     public class Menu
     {
-        private MenuView _view=new();
+        private readonly MenuView _view=new();
         private Boolean toMenu = false;
         private Boolean Exit = false;
         private Boolean newGame = false;
         public void Menuinit()
         {
-            _view.view();
+            MenuView.View();
 
             int opt = 0;
             
@@ -27,22 +27,17 @@ namespace Nonogram
                 if (newGame)
                 {
 
-                    newgame();
+                    Newgame();
                 }
                  else
                 {
                     if (toMenu)
                     {
-                        _view.view();
+                        MenuView.View();
                         toMenu = false;
                     }
 
-                    if (opt == 0)
-                        Console.SetCursorPosition(11, 12);
-                    if (opt == 1)
-                        Console.SetCursorPosition(11, 15);
-                    if (opt == 2)
-                        Console.SetCursorPosition(11, 18);
+                    MenuView.Options(opt);
 
                         keyInfo = Console.ReadKey(true);
 
@@ -68,7 +63,7 @@ namespace Nonogram
 
                             if (opt == 0)
                             {
-                                newgame();
+                                Newgame();
 
                             }
                             if (opt == 1)
@@ -80,7 +75,7 @@ namespace Nonogram
                         case ConsoleKey.Spacebar:
                             if (opt == 0)
                             {
-                                newgame();
+                                Newgame();
                             }
                             if(opt==1)
                             {
@@ -96,26 +91,28 @@ namespace Nonogram
 
         }
 
-        private void newgame()
+        private void Newgame()
         {
             Console.SetCursorPosition(10, 10);
-            Gra gra = new Gra();
-            toMenu = gra.newgameinit();
-            Exit = gra.endgame();
-            newGame = gra.newgamer();
-            _view.view();
+            Gra gra = new();
+            toMenu = gra.Newgameinit();
+            Exit = gra.Endgame();
+            newGame = gra.Newgamer();
+            if(!Exit)
+                MenuView.View();
 
         }
 
         private void Loadgame(string filename= "Continue.txt")
         {
             Console.SetCursorPosition(10, 10);
-            Gra gra = new Gra(filename);
-            toMenu = gra.newgameinit();
-            Exit = gra.endgame();
-            newGame = gra.newgamer();
-            gra.gameSaver();
-            _view.view();
+            Gra gra = new(filename);
+            toMenu = gra.Newgameinit();
+            Exit = gra.Endgame();
+            newGame = gra.Newgamer();
+            gra.GameSaver();
+            if(!Exit)
+                MenuView.View();
         }
     }
 
