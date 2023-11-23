@@ -329,7 +329,7 @@ namespace Nonogram
             return left;
         }
 
-        public void Gamefinish(int scorebad, int score)
+        public static void Gamefinish(int scorebad, int score)
         {
              for(int i = 0;i<19;i++)
             {
@@ -362,7 +362,7 @@ namespace Nonogram
             }
             Thread.Sleep(2000);
             Console.SetCursorPosition(25, 26);
-            Console.Write("Press any button to continue...");
+            Console.Write("Press any key to continue...");
         }
 
     }

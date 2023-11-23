@@ -93,7 +93,7 @@ namespace Nonogram
 
         private void Newgame()
         {
-            Newgameseed.Cleenmenunewgame();
+            //Newgameseed.Cleenmenunewgame();
             
            // while (true) { }
             Gra gra = new();
@@ -120,7 +120,7 @@ namespace Nonogram
         }
     }
 
-    public class Newgameseed
+    /*public class Newgameseed
         {
             public static void Cleenmenunewgame()
             {
@@ -136,7 +136,7 @@ namespace Nonogram
             Console.Write("Start NewGame");
             }
 
-        }
+        }*/
 
 
 }
