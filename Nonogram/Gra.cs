@@ -86,7 +86,7 @@ namespace Nonogram
             loaded = false;
 
 
-
+            
             
 
             Scoreupdate();
@@ -98,13 +98,16 @@ namespace Nonogram
 
             do
             {
+                result = manual.Controlsgame();
+
+
                 if (comunicator.Saver)
                 {
                     GameSaver();
                     comunicator.Saver = false;
                 }
 
-                result = manual.Controlsgame();
+               
                 if (result[1])
                 {
                     Scoreupdate();
@@ -118,6 +121,10 @@ namespace Nonogram
                 
                 
             } while (score.Scoreprogress!=score.Scoretrue);
+
+
+            gameField.Gamefinish(score.Scorebad, score.Score);
+            Console.ReadKey(true);
             return;
         }
 

@@ -328,6 +328,42 @@ namespace Nonogram
             }
             return left;
         }
-        
+
+        public void Gamefinish(int scorebad, int score)
+        {
+             for(int i = 0;i<19;i++)
+            {
+                Console.SetCursorPosition(21, 16+i);
+                Console.Write(new string(' ',39));
+            }
+            string end = "LEVEL COMPLETED";
+            Console.SetCursorPosition(33,23);
+            foreach(char character in end.ToCharArray()) 
+            {
+                Console.Write(character); 
+                Thread.Sleep(50);
+            }
+
+
+            string miss = $"Mistakes: {scorebad}";
+            Console.SetCursorPosition(35, 24);
+            foreach (char character in miss.ToCharArray())
+            {
+                Console.Write(character);
+                Thread.Sleep(50);
+            }
+
+            string scr = $"Score: {score}";
+            Console.SetCursorPosition(36, 25);
+            foreach (char character in scr.ToCharArray())
+            {
+                Console.Write(character);
+                Thread.Sleep(50);
+            }
+            Thread.Sleep(2000);
+            Console.SetCursorPosition(25, 26);
+            Console.Write("Press any button to continue...");
+        }
+
     }
 }

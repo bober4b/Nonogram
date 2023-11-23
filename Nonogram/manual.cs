@@ -270,5 +270,7 @@ namespace Nonogram
             if (opt == 4)
                 Console.SetCursorPosition(position + width * 6 - 2, position + height + 14);
         }
+
+
     }
 }

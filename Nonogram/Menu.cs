@@ -9,7 +9,7 @@ namespace Nonogram
 {
     public class Menu
     {
-        private readonly MenuView _view=new();
+
         private Boolean toMenu = false;
         private Boolean Exit = false;
         private Boolean newGame = false;
@@ -18,7 +18,7 @@ namespace Nonogram
             MenuView.View();
 
             int opt = 0;
-            
+
             ConsoleKeyInfo keyInfo;
 
 
@@ -29,7 +29,7 @@ namespace Nonogram
 
                     Newgame();
                 }
-                 else
+                else
                 {
                     if (toMenu)
                     {
@@ -39,7 +39,7 @@ namespace Nonogram
 
                     MenuView.Options(opt);
 
-                        keyInfo = Console.ReadKey(true);
+                    keyInfo = Console.ReadKey(true);
 
                     switch (keyInfo.Key)
                     {
@@ -77,7 +77,7 @@ namespace Nonogram
                             {
                                 Newgame();
                             }
-                            if(opt==1)
+                            if (opt == 1)
                             {
                                 Loadgame();
                             }
@@ -93,28 +93,51 @@ namespace Nonogram
 
         private void Newgame()
         {
-            Console.SetCursorPosition(10, 10);
+            Newgameseed.Cleenmenunewgame();
+            
+           // while (true) { }
             Gra gra = new();
             toMenu = gra.Newgameinit();
             Exit = gra.Endgame();
             newGame = gra.Newgamer();
-            if(!Exit)
+            if (!Exit)
                 MenuView.View();
 
         }
 
-        private void Loadgame(string filename= "Continue.txt")
+        private void Loadgame(string filename = "Continue.txt")
         {
-            Console.SetCursorPosition(10, 10);
+            
+
+            
             Gra gra = new(filename);
             toMenu = gra.Newgameinit();
             Exit = gra.Endgame();
             newGame = gra.Newgamer();
             gra.GameSaver();
-            if(!Exit)
+            if (!Exit)
                 MenuView.View();
         }
     }
+
+    public class Newgameseed
+        {
+            public static void Cleenmenunewgame()
+            {
+                for(int i = 0; i < 7; i++) 
+                {
+                Console.SetCursorPosition(12, 13+i);
+                Console.Write(new string(' ', Console.WindowWidth+i));
+
+                }
+            Console.SetCursorPosition(12, 14);
+            Console.Write("Wpisz seed gry: ");
+            Console.SetCursorPosition(12, 16);
+            Console.Write("Start NewGame");
+            }
+
+        }
+
 
 }
 
