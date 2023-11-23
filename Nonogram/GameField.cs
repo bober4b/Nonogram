@@ -14,7 +14,7 @@ namespace Nonogram
         private string[]? widthstring;
         private Hinter hinter;
 
-        private readonly Fieldseter fieldseter=new();
+        
         
 
         public void GameTable(int height, int width)

@@ -17,7 +17,7 @@ namespace Nonogram
         private readonly Scoremodule score;
         private readonly Comunicator comunicator;
 
-        private readonly Fieldseter fieldset;
+        
 
         private int x;
         private int y;
@@ -34,7 +34,7 @@ namespace Nonogram
             this.score = score;
             this.comunicator = comunicator;
 
-            fieldset = new();
+            
 
             x = 10 + width + width % 2 + 2;
             y = 10 + 1 + height / 2 + height % 2;
