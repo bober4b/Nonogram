@@ -365,7 +365,7 @@ namespace Nonogram
             Console.Write(" Press any key to continue...");
         }
 
-        public static void saved()
+        public static void Saved()
         {
             Console.SetCursorPosition(62, 14);
             string sv="Game have been saved!";

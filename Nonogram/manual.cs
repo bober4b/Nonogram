@@ -197,7 +197,7 @@ namespace Nonogram
                         if (opt == 1)
                         {
                             comunicator.Saver = true;
-                            GameField.saved();
+                            GameField.Saved();
                             break ;
                         }
                         if (opt == 2)
@@ -226,7 +226,7 @@ namespace Nonogram
                         if ( opt==1 )
                         {
                             comunicator.Saver= true;
-                            GameField.saved();
+                            GameField.Saved();
                             break;
                         }
                         if (opt == 2)
