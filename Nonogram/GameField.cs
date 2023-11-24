@@ -362,7 +362,23 @@ namespace Nonogram
             }
             Thread.Sleep(2000);
             Console.SetCursorPosition(25, 26);
-            Console.Write("Press any key to continue...");
+            Console.Write(" Press any key to continue...");
+        }
+
+        public static void saved()
+        {
+            Console.SetCursorPosition(62, 14);
+            string sv="Game have been saved!";
+
+            foreach (char character in sv.ToCharArray())
+            {
+                Console.Write(character);
+                Thread.Sleep(50);
+            }
+            Thread.Sleep(500);
+            Console.SetCursorPosition(62, 14);
+            Console.Write(new string(' ', 22));
+
         }
 
     }

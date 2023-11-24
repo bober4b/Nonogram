@@ -105,6 +105,7 @@ namespace Nonogram
                 {
                     GameSaver();
                     comunicator.Saver = false;
+                    
                 }
 
                
