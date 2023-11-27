@@ -366,6 +366,7 @@ namespace Nonogram.view
             Thread.Sleep(2000);
             Console.SetCursorPosition(25, 26);
             Console.Write(" Press any key to continue...");
+            Console.ReadKey(true);
         }
 
         public static void Saved()

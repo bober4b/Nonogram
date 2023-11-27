@@ -127,7 +127,7 @@ namespace Nonogram.controls
 
 
             GameField.Gamefinish(score.Scorebad, score.Score);
-            Console.ReadKey(true);
+           // Console.ReadKey(true);
             return;
         }
 
