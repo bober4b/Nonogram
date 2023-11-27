@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nonogram.view;
 
 //controler/manual
 namespace Nonogram.controls

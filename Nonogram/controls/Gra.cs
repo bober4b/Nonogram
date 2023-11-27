@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nonogram.models;
+using Nonogram.view;
 //controler
 namespace Nonogram.controls
 {

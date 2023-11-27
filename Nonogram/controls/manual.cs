@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nonogram.models;
-using static System.Formats.Asn1.AsnWriter;
+using Nonogram.view;
 //controler/manual
 namespace Nonogram.controls
 {
