@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //module
-namespace Nonogram
+namespace Nonogram.models
 {
     public class Comunicator
     {
-        public Boolean MenuExit { get; set; }
-        public Boolean Exit { get; set; }
-        public Boolean Initer { get; set; }
-        public Boolean Saver { get; set; }
+        public bool MenuExit { get; set; }
+        public bool Exit { get; set; }
+        public bool Initer { get; set; }
+        public bool Saver { get; set; }
 
         public Comunicator()
         {

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nonogram.models;
 
 
 //controler
-namespace Nonogram
+namespace Nonogram.controls
 {
     internal class Hinter
     {
         private string[,] hintListTop;
         private string[,] hintListLeft;
 
-        public Hinter(Field[,] field )
+        public Hinter(Field[,] field)
         {
             HintseterTop(field);
             HintseterLeft(field);
@@ -72,7 +73,7 @@ namespace Nonogram
         }
         private void HintseterLeft(Field[,] field)
         {
-            hintListLeft = new string[ field.GetLength(0) , field.GetLength(1)/2+field.GetLength(1)%2];
+            hintListLeft = new string[field.GetLength(0), field.GetLength(1) / 2 + field.GetLength(1) % 2];
 
             for (int i = 0; i < field.GetLength(0); i++)
             {
@@ -124,5 +125,5 @@ namespace Nonogram
             return result;
 
         }
-    } 
+    }
 }

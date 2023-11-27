@@ -4,9 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nonogram.models;
 using static System.Formats.Asn1.AsnWriter;
 //controler/manual
-namespace Nonogram
+namespace Nonogram.controls
 {
     public class Manual
     {
@@ -17,16 +18,16 @@ namespace Nonogram
         private readonly Scoremodule score;
         private readonly Comunicator comunicator;
 
-        
+
 
         private int x;
         private int y;
-        private int arrayx ;
-        private int arrayy ;
+        private int arrayx;
+        private int arrayy;
         private readonly int leftview;
         private readonly int topview;
 
-        public Manual(int width, int height, Field[,] field, Scoremodule score,Comunicator comunicator)
+        public Manual(int width, int height, Field[,] field, Scoremodule score, Comunicator comunicator)
         {
             this.width = width;
             this.height = height;
@@ -34,7 +35,7 @@ namespace Nonogram
             this.score = score;
             this.comunicator = comunicator;
 
-            
+
 
             x = 10 + width + width % 2 + 2;
             y = 10 + 1 + height / 2 + height % 2;
@@ -43,13 +44,13 @@ namespace Nonogram
             leftview = 10 + width + width % 2 + 4;
             topview = 10 + 1 + height / 2 + height % 2;
         }
-        public Boolean[] Controlsgame()
+        public bool[] Controlsgame()
         {
 
 
 
 
-            bool[] result=new bool[2];
+            bool[] result = new bool[2];
 
             result[0] = true;  // koniec gry?
             result[1] = false; // zaznaczenie pola?
@@ -110,7 +111,7 @@ namespace Nonogram
                         }
                         else
                         {
-                            
+
                             score.Scorebad++;
                             Fieldseter.Set(x, y, false, ConsoleColor.Red);
 
@@ -127,7 +128,7 @@ namespace Nonogram
 
                             score.Score++;
 
-                            Fieldseter.Set(x,y,true, ConsoleColor.Green);
+                            Fieldseter.Set(x, y, true, ConsoleColor.Green);
 
                         }
                         else
@@ -136,7 +137,7 @@ namespace Nonogram
 
                             score.Scorebad++;
                             score.Scoreprogress++;
-                            Fieldseter.Set(x,y, false, ConsoleColor.DarkGray);
+                            Fieldseter.Set(x, y, false, ConsoleColor.DarkGray);
 
                         }
 
@@ -157,7 +158,7 @@ namespace Nonogram
         }
 
 
-        private Boolean DuringGameMenu()
+        private bool DuringGameMenu()
         {
             int opt = 0;
             MenuingameView menuingameView = new();
@@ -198,7 +199,7 @@ namespace Nonogram
                         {
                             comunicator.Saver = true;
                             GameField.Saved();
-                            break ;
+                            break;
                         }
                         if (opt == 2)
                         {
@@ -223,9 +224,9 @@ namespace Nonogram
                         {
                             return false;
                         }
-                        if ( opt==1 )
+                        if (opt == 1)
                         {
-                            comunicator.Saver= true;
+                            comunicator.Saver = true;
                             GameField.Saved();
                             break;
                         }

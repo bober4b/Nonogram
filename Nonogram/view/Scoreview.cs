@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //view
-namespace Nonogram
+namespace Nonogram.view
 {
     public class Scoreview
     {
@@ -24,7 +24,7 @@ namespace Nonogram
 
 
             string[] result = new string[4];
-            foreach (Char number in score)
+            foreach (char number in score)
             {
                 if (int.TryParse(number.ToString(), out int x))
                 {
@@ -79,9 +79,9 @@ namespace Nonogram
             string[] result = new string[4];
 
 
-            string number2 = $"{((int)scorebad)}";
-            
-            foreach (Char number in number2)
+            string number2 = $"{scorebad}";
+
+            foreach (char number in number2)
             {
                 if (int.TryParse(number.ToString(), out int x))
                 {
@@ -90,20 +90,20 @@ namespace Nonogram
 
                     foreach (string help in numbers[x].Split("\n"))
                     {
-                        if(number2.Length ==1)
+                        if (number2.Length == 1)
                         {
                             result[y] = "   ";
                         }
 
                         if (number2.Length == 2)
-                            {
-                                result[y] += " ";
-                            }
+                        {
+                            result[y] += " ";
+                        }
 
                         result[y] += help + " ";
                         y++;
                     }
-                    
+
                 }
 
             }

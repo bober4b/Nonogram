@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //View
-namespace Nonogram
+namespace Nonogram.view
 {
     public class MenuView
     {
@@ -12,7 +12,7 @@ namespace Nonogram
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            string logo = ("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
+            string logo = "  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n";
             int index = 0;
             foreach (string line in logo.Split("\n"))
             {
@@ -24,7 +24,7 @@ namespace Nonogram
 
             //Console.SetCursorPosition(40, 10);
             index = 0;
-            string ng = ("             __         \n|\\| _       /__ _ __  _ \n| |(/_\\^/   \\_|(_||||(/_");
+            string ng = "             __         \n|\\| _       /__ _ __  _ \n| |(/_\\^/   \\_|(_||||(/_";
             foreach (string line in ng.Split("\n"))
             {
                 Console.SetCursorPosition(12, 10 + index);
@@ -33,8 +33,8 @@ namespace Nonogram
             }
             string ex = " __                     \n|_    o _|_            \n|__>< |  |_            ";
             index = 0;
-            
-            string lg= "                __          \n|   _  _  _|   /__ _ __  _ \n|__(_)(_|(_|   \\_|(_||||(/_";
+
+            string lg = "                __          \n|   _  _  _|   /__ _ __  _ \n|__(_)(_|(_|   \\_|(_||||(/_";
 
             foreach (string line in lg.Split("\n"))
             {
@@ -46,7 +46,7 @@ namespace Nonogram
                 index++;
             }
 
-            
+
 
             index = 0;
 

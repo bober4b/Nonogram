@@ -1,4 +1,4 @@
-﻿using Nonogram;
+﻿using Nonogram.controls;
 
 
 //Gra gra = new(10,10);

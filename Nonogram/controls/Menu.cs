@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 //controler/manual
-namespace Nonogram
+namespace Nonogram.controls
 {
     public class Menu
     {
 
-        private Boolean toMenu = false;
-        private Boolean Exit = false;
-        private Boolean newGame = false;
+        private bool toMenu = false;
+        private bool Exit = false;
+        private bool newGame = false;
         public void Menuinit()
         {
             MenuView.View();
@@ -94,8 +94,8 @@ namespace Nonogram
         private void Newgame()
         {
             //Newgameseed.Cleenmenunewgame();
-            
-           // while (true) { }
+
+            // while (true) { }
             Gra gra = new();
             toMenu = gra.Newgameinit();
             Exit = gra.Endgame();
@@ -107,9 +107,9 @@ namespace Nonogram
 
         private void Loadgame(string filename = "Continue.txt")
         {
-            
 
-            
+
+
             Gra gra = new(filename);
             toMenu = gra.Newgameinit();
             Exit = gra.Endgame();

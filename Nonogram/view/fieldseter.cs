@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 //view
-namespace Nonogram
+namespace Nonogram.view
 {
     public class Fieldseter
     {
-        public static void Set(int x, int y,bool answer, ConsoleColor color)
+        public static void Set(int x, int y, bool answer, ConsoleColor color)
         {
             if (answer)
             {

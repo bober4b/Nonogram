@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 
 //view
-namespace Nonogram
+namespace Nonogram.view
 {
-    
-    public  class GameField
+
+    public class GameField
     {
         private string[]? widthstring;
         private Hinter hinter;
 
-        
-        
+
+
 
         public void GameTable(int height, int width)
         {
@@ -26,30 +26,31 @@ namespace Nonogram
 
             // Aktualna pozycja w tablicy widthstring
             int currentPosition = 0;
-            for (int i = 0;i<height/2;i++)
-            {string[] help=hinter.HintGeterTop(i);
-                for (int j = 0; j < width+width%2; j++)
+            for (int i = 0; i < height / 2; i++)
+            {
+                string[] help = hinter.HintGeterTop(i);
+                for (int j = 0; j < width + width % 2; j++)
                     widthstring[currentPosition] += " ";
 
-                
-                for (int j = 0; j < width * 2+1 ; j++)
+
+                for (int j = 0; j < width * 2 + 1; j++)
                 {
                     if (j % 2 == 0)
                         widthstring[currentPosition] += "│";
                     else
                     {
-                        if (help[j/2].Length==1)
+                        if (help[j / 2].Length == 1)
                             widthstring[currentPosition] += $" {help[j / 2]} ";
                         else
                             widthstring[currentPosition] += $" {help[j / 2]}";
                     }
-                        
+
                 }
                 widthstring[currentPosition] += "\n";
                 currentPosition++;
-                    
+
             }
-            
+
 
 
 
@@ -74,7 +75,7 @@ namespace Nonogram
             {
                 for (int j = 0; j < width * 2; j++)
                 {
-                    
+
                     if (j % 2 == 0)
                         widthstring[currentPosition] += "║";
                     else
@@ -113,22 +114,22 @@ namespace Nonogram
                 }
             }
 
-            
-        
+
+
         }
-        public void GametableView(int startx,int starty,bool loaded, Field[,] field)
+        public void GametableView(int startx, int starty, bool loaded, Field[,] field)
         {
             Console.Clear();
             int z = 0;
-            
+
             foreach (string line in widthstring)
             {
-                Console.SetCursorPosition(startx,starty+z);
-                
+                Console.SetCursorPosition(startx, starty + z);
+
                 z++;
                 Console.Write(line);
             }
-            if(loaded)
+            if (loaded)
             {
                 for (int i = 0; i < 10; i++)
                     for (int j = 0; j < 10; j++)
@@ -148,16 +149,16 @@ namespace Nonogram
                             }
                             else
                             {
-                                
-                                    if (field[i, j].Getcolor())
-                                    {
+
+                                if (field[i, j].Getcolor())
+                                {
                                     Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.DarkGray);
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
                                     Fieldseter.Set(startx + j * 4 + 12, starty + i * 2 + 6, false, ConsoleColor.Red);
-                                    }
-                                
+                                }
+
                             }
                         }
                         else
@@ -166,7 +167,7 @@ namespace Nonogram
                         }
                     }
             }
-          
+
 
             string star = " ##   ## \n  ## ##  \n#########\n  ## ##  \n ##   ## ";
             Console.SetCursorPosition(10, 10);
@@ -179,7 +180,7 @@ namespace Nonogram
                 h++;
             }
 
-            string logo = ("  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n");
+            string logo = "  _   _   ____   _   _   ____    _____  _____             __  __ \r\n | \\ | | / __ \\ | \\ | | / __ \\  / ____||  __ \\     /\\    |  \\/  |\r\n |  \\| || |  | ||  \\| || |  | || |  __ | |__) |   /  \\   | \\  / |\r\n | . ` || |  | || . ` || |  | || | |_ ||  _  /   / /\\ \\  | |\\/| |\r\n | |\\  || |__| || |\\  || |__| || |__| || | \\ \\  / ____ \\ | |  | |\r\n |_| \\_| \\____/ |_| \\_| \\____/  \\_____||_|  \\_\\/_/    \\_\\|_|  |_|\r\n";
             int index = 0;
             foreach (string line in logo.Split("\n"))
             {
@@ -227,9 +228,9 @@ namespace Nonogram
             Console.SetCursorPosition(startx + position * 3 + 40, starty + position - 5);
             Console.Write("╗");
 
-            for (int i = 0; i < startx + position  -1; i++)
+            for (int i = 0; i < startx + position - 1; i++)
             {
-                Console.SetCursorPosition(startx + position*5+1 + i, starty + position / 2);
+                Console.SetCursorPosition(startx + position * 5 + 1 + i, starty + position / 2);
                 Console.Write("═");
             }
 
@@ -282,9 +283,9 @@ namespace Nonogram
 
         public void GamehintTable(Field[,] field)
         {
-            hinter=new Hinter(field);
+            hinter = new Hinter(field);
 
-            
+
 
         }
 
@@ -301,17 +302,17 @@ namespace Nonogram
                     else
                         left += "   ";
                 }
-                
+
                 return left;
             }
 
 
-            
-                help = hinter.HintGeterLeft(current);
-            
-            for (int i=0; i < height/2+height%2; i++)
-            { 
-                if(index)
+
+            help = hinter.HintGeterLeft(current);
+
+            for (int i = 0; i < height / 2 + height % 2; i++)
+            {
+                if (index)
                     left += "──";
                 else
                 {
@@ -331,16 +332,16 @@ namespace Nonogram
 
         public static void Gamefinish(int scorebad, int score)
         {
-             for(int i = 0;i<19;i++)
+            for (int i = 0; i < 19; i++)
             {
-                Console.SetCursorPosition(21, 16+i);
-                Console.Write(new string(' ',39));
+                Console.SetCursorPosition(21, 16 + i);
+                Console.Write(new string(' ', 39));
             }
             string end = "LEVEL COMPLETED";
-            Console.SetCursorPosition(33,23);
-            foreach(char character in end.ToCharArray()) 
+            Console.SetCursorPosition(33, 23);
+            foreach (char character in end.ToCharArray())
             {
-                Console.Write(character); 
+                Console.Write(character);
                 Thread.Sleep(50);
             }
 
@@ -368,7 +369,7 @@ namespace Nonogram
         public static void Saved()
         {
             Console.SetCursorPosition(62, 14);
-            string sv="Game have been saved!";
+            string sv = "Game has been saved!";
 
             foreach (char character in sv.ToCharArray())
             {
@@ -377,7 +378,7 @@ namespace Nonogram
             }
             Thread.Sleep(500);
             Console.SetCursorPosition(62, 14);
-            Console.Write(new string(' ', 22));
+            Console.Write(new string(' ', 24));
 
         }
 

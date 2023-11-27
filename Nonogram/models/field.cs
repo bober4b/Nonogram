@@ -7,61 +7,61 @@ using System.Runtime.InteropServices;
 
 
 //module
-namespace Nonogram
+namespace Nonogram.models
 {
     public class Field
     {
-        private Boolean color;
-        private Boolean answered;
-        private Boolean _answer;
+        private bool color;
+        private bool answered;
+        private bool _answer;
         public Field()
         {
             color = false;
             answered = false;
         }
-        public Field(Boolean color)
+        public Field(bool color)
         {
             this.color = color;
-            answered = false; 
+            answered = false;
         }
-        public Boolean Iscolor(Boolean color)
+        public bool Iscolor(bool color)
         {
             answered = true;
             if (this.color == color)
             { _answer = true; return true; }
             else { _answer = false; return false; }
         }
-        public void Setcolor(Boolean color) 
+        public void Setcolor(bool color)
         {
             this.color = color;
         }
-        public Boolean Getcolor()
+        public bool Getcolor()
         {
-            return this.color;
+            return color;
         }
 
-        public Boolean Answer()
+        public bool Answer()
         {
             return answered;
         }
 
-        public void Setanswered(Boolean answered)
+        public void Setanswered(bool answered)
         {
-            this.answered=answered;
+            this.answered = answered;
         }
-        public void Set_answer(Boolean _answer)
+        public void Set_answer(bool _answer)
         {
-             this._answer=_answer;
+            this._answer = _answer;
         }
-        public Boolean Get_answer()
+        public bool Get_answer()
         {
             return _answer;
         }
-        
+
         public override string ToString()
         {
             return $"{color},{answered},{_answer}";
         }
-        
+
     }
 }
