@@ -1,0 +1,1 @@
+Ten program jest napisany w języku C# i służy do gry w popularną grę logiczną znaną jako "Nonogram" lub "Picross". Gra polega na odkrywaniu ukrytych obrazków poprzez rozwiązywanie logicznych zagadek na siatce, w której wiersze i kolumny posiadają wskazówki dotyczące liczby i rozmieszczenia pikseli, które należy odkryć.
